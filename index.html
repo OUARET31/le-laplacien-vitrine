@@ -85,7 +85,7 @@
   .level-card{border-radius:20px;overflow:hidden;background:var(--card);color:var(--text);
     box-shadow:0 2px 0 rgba(0,0,0,.04), 0 24px 50px rgba(15,22,48,.18);display:flex;flex-direction:column}
   .level-card:hover{color:var(--text);box-shadow:0 30px 70px rgba(15,22,48,.28)}
-  .level-card .art{height:150px;position:relative}
+  .level-card .art{height:210px;position:relative}
   .level-card .art svg{width:100%;height:100%;display:block}
   .level-card .body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1;transform-style:preserve-3d}
   .level-card h2{margin:0 0 4px;font-size:30px;color:var(--c)}
@@ -152,7 +152,7 @@
   .year-head p{margin:0;color:var(--muted)}
   .subjects{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
   .subject{border-radius:18px;overflow:hidden;background:var(--card);box-shadow:0 2px 0 rgba(0,0,0,.04),0 18px 40px rgba(15,22,48,.14);display:flex;flex-direction:column}
-  .subject .art{height:120px;position:relative}
+  .subject .art{height:180px;position:relative}
   .subject .art svg{width:100%;height:100%;display:block}
   .subject .art::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(10,14,32,.65), transparent 65%)}
   .subject .title{z-index:1}
@@ -200,7 +200,7 @@
     display:flex;align-items:center;justify-content:center;text-shadow:none;box-shadow:0 6px 0 color-mix(in srgb, var(--c) 55%, #000), 0 18px 30px rgba(0,0,0,.4);transform:rotate(-5deg)}
   .art.photo{background:#0f1630}
   .art.photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
-  .level-card:hover .art.photo img,.subject:hover .art.photo img{transform:scale(1.08)}
+  .level-card:hover .art.photo img,.subject:hover .art.photo img{transform:scale(1.04)}
   .subject{cursor:pointer}
   .subject li a .num{width:26px;height:26px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;
     background:linear-gradient(145deg,#2b3a80,var(--ink));box-shadow:0 3px 0 #070b1c}
@@ -221,6 +221,54 @@
   .layout aside.right{background:rgba(255,255,255,.82);backdrop-filter:blur(8px);border-radius:16px;padding:14px 16px;box-shadow:0 10px 30px rgba(15,22,48,.08)}
   article.lesson{background:rgba(255,255,255,.9);backdrop-filter:blur(10px)}
 
+
+  /* ---------- Miniatures, cartes leçons photo ---------- */
+  .subject li a .thumb{position:relative;width:54px;height:38px;border-radius:8px;overflow:hidden;flex:none;box-shadow:0 3px 8px rgba(0,0,0,.25)}
+  .subject li a .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .subject li a .thumb .num{position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:5px;font-size:10px;box-shadow:none}
+  .lesson-card{padding:0;overflow:hidden;min-height:0}
+  .lesson-card .lphoto{display:block;height:140px;overflow:hidden}
+  .lesson-card .lphoto img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+  .lesson-card:hover .lphoto img{transform:scale(1.05)}
+  .lesson-card .bignum{position:absolute;top:104px;left:16px;background:#fff;border-radius:12px;padding:4px 10px;font-size:30px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+  .lesson-card .lbody{display:flex;flex-direction:column;gap:6px;padding:26px 18px 16px;flex:1}
+  article.lesson .cover{height:300px;position:relative;overflow:hidden}
+  article.lesson .cover img{width:100%;height:100%;object-fit:cover;display:block}
+  /* ---------- Bandeau de photos ---------- */
+  .marquee{overflow:hidden;margin:10px 0 80px;transform:perspective(900px) rotateX(8deg);transform-origin:50% 0}
+  .mrow{overflow:hidden;margin:10px 0}
+  .mtrack{display:flex;gap:12px;width:max-content;animation:slide 90s linear infinite}
+  .mrow.r .mtrack{animation-direction:reverse;animation-duration:110s}
+  .marquee:hover .mtrack{animation-play-state:paused}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  .mimg{width:220px;height:140px;border-radius:14px;overflow:hidden;flex:none;box-shadow:0 10px 24px rgba(15,22,48,.2)}
+  .mimg img{width:100%;height:100%;object-fit:cover;display:block}
+  /* ---------- Anecdotes : cartes qui se retournent ---------- */
+  .home-anec{max-width:1180px;margin:0 auto 80px;padding:0 4vw}
+  .home-anec-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+  .home-anec-head h2{margin:0;font-size:34px;color:var(--ink)}
+  .anec-wrap{max-width:1300px;margin:0 auto;padding:10px 4vw 90px}
+  .anec-note{font-size:12px;color:var(--muted);text-align:center;margin-top:30px}
+  .flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px}
+  .flips.one{grid-template-columns:minmax(0,420px)}
+  .flip{perspective:1200px;height:360px;cursor:pointer;outline:none}
+  .flip-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+  .flip:hover .flip-in{transform:rotateY(8deg) rotateX(-3deg)}
+  .flip.on .flip-in{transform:rotateY(180deg)}
+  .flip:focus-visible .flip-in{box-shadow:0 0 0 3px var(--gold);border-radius:20px}
+  .face{position:absolute;inset:0;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 20px 44px rgba(15,22,48,.25)}
+  .face.front img{width:100%;height:100%;object-fit:cover;display:block}
+  .fshade{position:absolute;inset:0;background:linear-gradient(to top, rgba(10,14,32,.92) 10%, rgba(10,14,32,.2) 60%, transparent)}
+  .face.front h3{position:absolute;left:18px;right:18px;bottom:44px;margin:0;color:#fff;font-size:22px;line-height:1.25;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+  .fhint{position:absolute;left:18px;bottom:16px;color:var(--gold);font-size:13px;font-weight:700}
+  .fcat{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+  .fcat.dark{position:static;display:inline-block;background:#efe9fb;border-color:#e0d4f7;color:#5b21b6;margin-bottom:8px}
+  .face.back{transform:rotateY(180deg);background:linear-gradient(160deg,#fff 0%,#f6f1ff 100%);padding:20px;display:flex;flex-direction:column;overflow:auto}
+  .face.back h3{margin:0 0 8px;font-size:19px;color:var(--ink)}
+  .face.back p{margin:0 0 12px;font-size:14.5px;color:var(--text)}
+  .sci{margin-top:auto;background:#fff8e6;border:1px solid #f1dfae;border-radius:12px;padding:10px 12px;font-size:13.5px}
+  #filters a.on{background:var(--gold);color:var(--ink)}
+
   footer{background:var(--ink);color:#aab1d0;text-align:center;font-size:14px;padding:26px}
   footer b{color:#fff;font-family:Fraunces,serif;letter-spacing:.08em}
 
@@ -233,7 +281,7 @@
     .layout{grid-template-columns:1fr;gap:16px} aside.left{position:static;max-height:none}
     article.lesson .content{padding:22px 20px} article.lesson .cover{height:180px}
   }
-  @media (prefers-reduced-motion:reduce){ .bg3d .floor,.bg3d .shape{animation:none} .tilt{transition:none} }
+  @media (prefers-reduced-motion:reduce){ .mtrack{animation:none}  .bg3d .floor,.bg3d .shape{animation:none} .tilt{transition:none} }
 </style>
 </head>
 <body>
@@ -285,14 +333,14 @@ const MATIERES = {
 const PHOTO = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=`;
 
 const SITE = [
-  { id:"college", titre:"Collège", couleur:"#1f8a70", photo:9907285, intro:"De la 6e à la 3e : les notions essentielles pour réussir le brevet.",
+  { id:"college", titre:"Collège", couleur:"#1f8a70", photo:11200121, intro:"De la 6e à la 3e : les notions essentielles pour réussir le brevet.",
     annees:[
       { id:"6e", titre:"Sixième", court:"6e", matieres:{
         "mathematiques":{ photo:29264971, lecons:["Les nombres entiers et décimaux","Comparer et ranger les décimaux","Les fractions","Addition et soustraction","Multiplication et division","Les angles","Le cercle","Périmètres et aires","La symétrie axiale"] },
-        "physique-chimie":{ photo:8442647, lecons:["La matière qui nous entoure","Mélanges et solutions","Les états de l'eau","Masse et volume","Les sources d'énergie"] },
+        "physique-chimie":{ photo:8544960, lecons:["La matière qui nous entoure","Mélanges et solutions","Les états de l'eau","Masse et volume","Les sources d'énergie"] },
         "svt":{ photo:529527, lecons:["Classer le vivant","Les besoins des plantes","La cellule, unité du vivant","Le développement des êtres vivants","Les êtres vivants dans leur milieu"] } }},
       { id:"5e", titre:"Cinquième", court:"5e", matieres:{
-        "mathematiques":{ photo:7580753, lecons:["Les nombres relatifs","Les priorités opératoires","La proportionnalité","Les triangles","Les parallélogrammes","Les statistiques","Comparer et additionner des fractions"] },
+        "mathematiques":{ photo:6692914, lecons:["Les nombres relatifs","Les priorités opératoires","La proportionnalité","Les triangles","Les parallélogrammes","Les statistiques","Comparer et additionner des fractions"] },
         "physique-chimie":{ photo:1495580, lecons:["Les états de la matière","Les changements d'état","Le circuit électrique","Conducteurs et isolants","Le son"] },
         "svt":{ photo:1200225, lecons:["La respiration des êtres vivants","Nutrition et digestion","Le sang et la circulation","Les roches et les paysages","La météo et le climat"] } }},
       { id:"4e", titre:"Quatrième", court:"4e", matieres:{
@@ -319,7 +367,7 @@ const SITE = [
         "physique-chimie":{ photo:7425345, lecons:["La mécanique de Newton","Le mouvement dans un champ","La cinétique chimique","Les équilibres acide-base","Ondes et diffraction","La thermodynamique"] },
         "svt":{ photo:30596249, lecons:["Génétique et évolution","Le climat de la Terre","La communication nerveuse","Le domaine continental","La plante domestiquée"] } }}
     ]},
-  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:2182863, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
+  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:34007243, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
     annees:[
       { id:"bac1", titre:"1re année (Bac+1)", court:"Bac+1", matieres:{
         "langage-c":{ photo:546819, lecons:["Variables, types et opérateurs","Conditions et boucles","Fonctions","Entrées et sorties","Le débogage"] },
@@ -341,6 +389,67 @@ const SITE = [
         "electronique":{ photo:2105927, lecons:["Conception de circuits intégrés","Du schéma au layout","Vérification et test","Les circuits analogiques intégrés"] },
         "fpga-vhdl":{ photo:40270826, lecons:["Contraintes de timing","Système sur puce (SoC) sur FPGA","La synthèse haut niveau","Le traitement du signal sur FPGA"] } }}
     ]}
+];
+
+
+// Réserves de photos par matière (pour illustrer chaque leçon)
+const POOLS = {
+  "mathematiques":  [29264971,6692914,6256066,714699,22690750,22690751,6238050,311269,11200121,6990047,209224,7580753],
+  "physique-chimie":[8544960,1495580,10424708,716398,3845162,10187634,7425345,8442647,10187137,3825573,954585,8325983],
+  "svt":            [529527,1200225,6307488,4033019,256262,5721685,30596249,9907285,2563455,4594030,4414868,2233992,230864,30596225,30596276,12904927,4031654,4033145],
+  "langage-c":      [546819,10816120,965345,6424584,6424589,36571389],
+  "python":         [6424584,36571389,6424589,546819,965345,10816120],
+  "electronique":   [32894960,18471567,6636476,2105927,6432109,34007243,2182863,6636477,32894980],
+  "fpga-vhdl":      [209711,11272008,40270826,6636477,2105927,6432109,2182863]
+};
+
+// Coin anecdotes (faits vérifiés, rédigés pour le site)
+const ANECDOTES = [
+  { cat:"Harry Potter", photo:15471785, titre:"Une idée née dans un train en retard",
+    texte:"En 1990, J.K. Rowling est bloquée des heures dans un train entre Manchester et Londres. C'est là que lui vient l'idée d'un garçon qui ignore qu'il est sorcier. Le premier tome, refusé par plusieurs éditeurs, paraîtra finalement en 1997.",
+    science:"Persévérance : même les plus grandes idées demandent des années de travail." },
+  { cat:"Harry Potter", photo:16827795, titre:"Nicolas Flamel a vraiment existé",
+    texte:"Le Flamel cité dans le premier tome est inspiré d'un vrai Parisien du Moyen Âge, que la légende a transformé en alchimiste. Sa maison, construite en 1407 au 51 rue de Montmorency, est considérée comme la plus vieille maison de Paris.",
+    science:"Chimie : l'alchimie est l'ancêtre de la chimie moderne." },
+  { cat:"Harry Potter", photo:7978061, titre:"Transformer un métal en or ? C'est arrivé en 1980",
+    texte:"Le chimiste Glenn Seaborg a changé quelques milliers d'atomes de bismuth en or grâce à un accélérateur de particules. Le procédé coûte bien plus cher que l'or obtenu : la pierre philosophale reste un rêve !",
+    science:"Physique nucléaire : changer le nombre de protons d'un noyau change l'élément chimique." },
+  { cat:"Harry Potter", photo:1543417, titre:"Les chouettes ne tournent pas la tête à 360°",
+    texte:"Leurs yeux sont fixes dans leur crâne : pour regarder autour d'elles, les chouettes tournent la tête jusqu'à environ 270°. Leur cou compte deux fois plus de vertèbres que le nôtre.",
+    science:"SVT : une adaptation anatomique au mode de vie de prédateur nocturne." },
+  { cat:"Harry Potter", photo:32478366, titre:"La mandragore est une vraie plante",
+    texte:"La mandragore existe bel et bien. Sa racine, parfois en forme de silhouette humaine, a nourri de nombreuses légendes. Elle est toxique : elle contient des alcaloïdes puissants.",
+    science:"SVT et chimie : les plantes fabriquent des molécules pour se défendre." },
+  { cat:"Harry Potter", photo:8391461, titre:"Harry et son autrice ont le même anniversaire",
+    texte:"Harry Potter est né un 31 juillet… comme J.K. Rowling. Et le prénom Hermione vient d'une pièce de Shakespeare, Le Conte d'hiver.",
+    science:"Maths : avec 23 personnes dans une classe, il y a plus d'une chance sur deux que deux élèves aient le même anniversaire !" },
+  { cat:"Once Upon a Time", photo:19753171, titre:"Storybrooke n'existe pas… mais on peut s'y promener",
+    texte:"La ville de la série est censée se trouver dans le Maine, aux États-Unis. En réalité, ses rues ont été tournées à Steveston, un village de pêcheurs près de Vancouver, au Canada.",
+    science:"Géographie : le cinéma transforme souvent un lieu réel en un autre." },
+  { cat:"Once Upon a Time", photo:7200443, titre:"Les créateurs venaient de la série Lost",
+    texte:"Once Upon a Time a été imaginée par Edward Kitsis et Adam Horowitz, deux scénaristes de Lost. Elle a duré sept saisons, de 2011 à 2018, en mélangeant tous les contes de fées.",
+    science:"Logique : construire une histoire où tous les personnages se croisent demande un vrai plan, comme un programme." },
+  { cat:"Once Upon a Time", photo:16827797, titre:"Rumplestiltskin, alias le Nain Tracassin",
+    texte:"Ce personnage vient d'un conte des frères Grimm, où il file de la paille pour la changer en or. En français, on l'appelle souvent le Nain Tracassin.",
+    science:"Chimie : la paille est faite surtout de carbone, d'hydrogène et d'oxygène. Aucune réaction chimique ne peut en faire de l'or, qui est un élément." },
+  { cat:"Contes de fées", photo:33928544, titre:"Miroir, mon beau miroir… qui n'inverse pas la gauche et la droite",
+    texte:"On dit souvent qu'un miroir inverse la gauche et la droite. En fait, il inverse l'avant et l'arrière : votre main droite reste du côté droit de l'image, mais votre reflet vous fait face.",
+    science:"Physique : la réflexion de la lumière sur une surface plane." },
+  { cat:"Contes de fées", photo:11595286, titre:"Pantoufle de verre… ou de vair ?",
+    texte:"Perrault a bien écrit « pantoufle de verre » en 1697. Au XIXe siècle, Balzac a proposé qu'il s'agissait de « vair », une fourrure, car danser avec du verre semblait impossible. Le débat dure encore !",
+    science:"Physique : le verre est rigide et cassant, peu pratique pour danser." },
+  { cat:"Contes de fées", photo:35001488, titre:"La plus vieille Cendrillon est chinoise",
+    texte:"L'histoire de Ye Xian, écrite vers l'an 850 en Chine par Duan Chengshi, raconte une jeune fille maltraitée, un poisson magique et une pantoufle d'or perdue lors d'une fête.",
+    science:"Histoire : les mêmes contes voyagent et se transforment d'un continent à l'autre." },
+  { cat:"Contes de fées", photo:18674316, titre:"Des citrouilles de plus d'une tonne",
+    texte:"Le carrosse de Cendrillon n'est peut-être pas si exagéré : les citrouilles géantes des concours dépassent aujourd'hui une tonne !",
+    science:"SVT : la photosynthèse transforme lumière, eau et CO₂ en matière végétale." },
+  { cat:"Contes de fées", photo:3652898, titre:"La pomme empoisonnée de Blanche-Neige",
+    texte:"Les pépins de pomme contiennent de l'amygdaline, qui peut libérer du cyanure dans l'organisme. Rassurez-vous : il faudrait en croquer une énorme quantité pour être en danger.",
+    science:"Chimie : c'est la dose qui fait le poison." },
+  { cat:"Contes de fées", photo:29031148, titre:"Les premiers contes de Grimm n'étaient pas pour les enfants",
+    texte:"Les frères Grimm publient leur premier recueil en 1812. Leurs versions sont parfois très cruelles : à la fin de Blanche-Neige, la reine doit danser avec des souliers de fer chauffés au rouge. Ils étaient aussi de grands spécialistes de la langue allemande.",
+    science:"Langues : les Grimm ont étudié comment les sons des langues évoluent avec le temps." }
 ];
 
 /* ===================== Outils ===================== */
@@ -503,7 +612,7 @@ function setBackground(photoId, mat, seed, couleur){
   let mx = 0, my = 0;
   const apply = () => {
     const y = scrollY;
-    im.style.transform = `perspective(1200px) translate3d(0, ${y*0.35}px, 0) scale(${1.12 + y*0.0002}) rotateX(${my*2.5}deg) rotateY(${mx*-3}deg)`;
+    im.style.transform = `perspective(1200px) translate3d(0, ${y*0.35}px, 0) scale(${1.04 + y*0.0001}) rotateX(${my*1.5}deg) rotateY(${mx*-2}deg)`;
     bg.style.opacity = Math.max(0.15, 1 - y/1100);
   };
   if (bgHandlers) { removeEventListener("scroll", bgHandlers.s); removeEventListener("mousemove", bgHandlers.m); }
@@ -514,13 +623,59 @@ function setBackground(photoId, mat, seed, couleur){
   apply();
 }
 
+// Photo d'une leçon : prise dans la réserve de sa matière, différente pour chaque leçon d'une même liste
+function lessonPhoto(m, i, seed){
+  const pool = POOLS[m.id] || [m.photo];
+  const start = hash(seed) % pool.length;
+  let p = pool[(start + i) % pool.length];
+  if (p === m.photo && pool.length > 1) p = pool[(start + i + 1) % pool.length];
+  return p;
+}
+
 function renderNav(current){
   $("topnav").innerHTML = `<a href="#accueil" class="${!current?'active':''}">Accueil</a>` +
-    SITE.map(r => `<a href="#${r.id}" class="${r.id===current?'active':''}">${r.titre}</a>`).join("");
+    SITE.map(r => `<a href="#${r.id}" class="${r.id===current?'active':''}">${r.titre}</a>`).join("") +
+    `<a href="#anecdotes" class="${current==='anecdotes'?'active':''}">Anecdotes ✨</a>`;
+}
+
+function marquee(){
+  const all = [...new Set(Object.values(POOLS).flat().concat(ANECDOTES.map(a => a.photo)))];
+  const half = Math.ceil(all.length/2);
+  const row = (list, dir) => `<div class="mrow ${dir}"><div class="mtrack">${[...list, ...list].map(p =>
+    `<div class="mimg">${img(p, 500, "mathematiques", "mq"+p, "#2443b8")}</div>`).join("")}</div></div>`;
+  return `<section class="marquee" aria-hidden="true">${row(all.slice(0, half), "l")}${row(all.slice(half), "r")}</section>`;
+}
+
+function anecdoteCard(a, i){
+  return `<div class="flip" tabindex="0" data-cat="${a.cat}" role="button" aria-label="${a.titre}">
+    <div class="flip-in">
+      <div class="face front">
+        ${img(a.photo, 700, "svt", "an"+i, "#7c3aed")}
+        <div class="fshade"></div>
+        <span class="fcat">${a.cat}</span>
+        <h3>${a.titre}</h3>
+        <span class="fhint">Cliquer pour découvrir ↻</span>
+      </div>
+      <div class="face back">
+        <span class="fcat dark">${a.cat}</span>
+        <h3>${a.titre}</h3>
+        <p>${a.texte}</p>
+        <div class="sci"><b>🔬 Le lien avec les sciences</b><br>${a.science}</div>
+      </div>
+    </div>
+  </div>`;
+}
+function bindFlips(root){
+  root.querySelectorAll(".flip").forEach(f => {
+    const t = () => f.classList.toggle("on");
+    f.addEventListener("click", t);
+    f.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); t(); } });
+  });
 }
 
 function renderHome(){
   renderNav(null); setBackground(null);
+  const pick = [ANECDOTES[2], ANECDOTES[10], ANECDOTES[6]];
   $("app").innerHTML = `
     <section class="hero">
       <canvas id="surface" aria-hidden="true"></canvas>
@@ -528,14 +683,14 @@ function renderHome(){
         <h1>LE LAPLACIEN</h1>
         <div class="formula sym">Δf = ∇²f = ∂²f/∂x² + ∂²f/∂y² + ∂²f/∂z²</div>
         <p>Cours, vidéos et exercices en sciences, du collège jusqu'aux études supérieures. Choisissez votre niveau pour commencer.</p>
-        <div class="cta">${SITE.map((r,i)=>`<a class="btn3d ${i?'ghost':''}" href="#${r.id}">${r.titre}</a>`).join("")}</div>
+        <div class="cta">${SITE.map((r,i)=>`<a class="btn3d ${i?'ghost':''}" href="#${r.id}">${r.titre}</a>`).join("")}<a class="btn3d ghost" href="#anecdotes">Anecdotes ✨</a></div>
       </div>
     </section>
     <div class="levels">
       ${SITE.map(r => {
         const mats = [...new Set(r.annees.flatMap(a => a.liste.map(m => m.id)))];
         return `<a class="level-card tilt" data-tilt="12" href="#${r.id}" style="--c:${r.couleur}">
-          <div class="art photo">${img(r.photo, 900, mats[0], "rub-"+r.id, r.couleur)}</div>
+          <div class="art photo">${img(r.photo, 1000, mats[0], "rub-"+r.id, r.couleur)}</div>
           <div class="body">
             <h2 class="depth-1">${r.titre}</h2>
             <p class="depth-1">${r.intro}</p>
@@ -546,6 +701,11 @@ function renderHome(){
           <span class="glare"></span>
         </a>`; }).join("")}
     </div>
+    ${marquee()}
+    <section class="home-anec">
+      <div class="home-anec-head"><h2>✨ Le saviez-vous ?</h2><a class="btn3d" href="#anecdotes">Toutes les anecdotes →</a></div>
+      <div class="flips">${pick.map((a,i) => anecdoteCard(a, "h"+i)).join("")}</div>
+    </section>
     <div class="features">
       <div class="feature tilt" data-tilt="8"><div class="ico depth-1">▶</div><h3>Vidéos de cours</h3><p>Chaque notion expliquée pas à pas, à revoir autant que nécessaire.</p><span class="glare"></span></div>
       <div class="feature tilt" data-tilt="8"><div class="ico depth-1 sym">∑</div><h3>Exercices corrigés</h3><p>Des exercices progressifs avec leurs corrections détaillées.</p><span class="glare"></span></div>
@@ -553,7 +713,29 @@ function renderHome(){
     </div>`;
   if (spy) spy.disconnect();
   startHero($("surface"));
-  enableTilt($("app"));
+  enableTilt($("app")); bindFlips($("app"));
+}
+
+function renderAnecdotes(){
+  renderNav("anecdotes");
+  setBackground(11595286, "svt", "bg-anec", "#7c3aed");
+  const cats = [...new Set(ANECDOTES.map(a => a.cat))];
+  $("app").innerHTML = `
+    <div class="pagehero"><div class="inner">
+      <div class="kicker">Pause détente</div>
+      <h1><span class="ico3d" style="--c:#7c3aed">✨</span>Le coin anecdotes</h1>
+      <p>Harry Potter, Once Upon a Time, contes de fées… et la science cachée derrière la magie. Cliquez sur une carte pour la retourner.</p>
+      <div class="yearbar" id="filters"><a href="#" data-f="" class="on">Tout</a>${cats.map(c => `<a href="#" data-f="${c}">${c}</a>`).join("")}</div>
+    </div></div>
+    <div class="anec-wrap"><div class="flips" id="flips">${ANECDOTES.map((a,i) => anecdoteCard(a, i)).join("")}</div>
+    <p class="anec-note">Harry Potter et Once Upon a Time sont des marques de leurs propriétaires respectifs ; ce site n'y est pas affilié. Photos : Pexels.</p></div>`;
+  bindFlips($("app"));
+  $("filters").querySelectorAll("a").forEach(b => b.onclick = e => {
+    e.preventDefault();
+    $("filters").querySelectorAll("a").forEach(x => x.classList.toggle("on", x === b));
+    $("flips").querySelectorAll(".flip").forEach(f => f.style.display = (!b.dataset.f || f.dataset.cat === b.dataset.f) ? "" : "none");
+  });
+  if (spy) spy.disconnect();
 }
 
 function shell(heroHtml){
@@ -592,8 +774,8 @@ function renderRight(items){
 function subjectCard(r, a, m){
   const more = m.lecons.length - PREVIEW;
   return `<div class="subject tilt" data-tilt="7" data-href="#${r.id}--${m.page}" role="link" tabindex="0" aria-label="${m.titre} ${a.titre}">
-    <div class="art photo">${img(m.photo, 800, m.id, a.id+"-"+m.id, m.couleur)}<div class="title depth-1"><span class="ico">${m.ico}</span>${m.titre}</div></div>
-    <ul>${m.lecons.slice(0, PREVIEW).map((l,i) => `<li><a href="#${r.id}--${l.id}"><span class="num">${i+1}</span>${l.titre}</a></li>`).join("")}</ul>
+    <div class="art photo">${img(m.photo, 900, m.id, a.id+"-"+m.id, m.couleur)}<div class="title depth-1"><span class="ico">${m.ico}</span>${m.titre}</div></div>
+    <ul>${m.lecons.slice(0, PREVIEW).map((l,i) => `<li><a href="#${r.id}--${l.id}"><span class="thumb">${img(lessonPhoto(m, i, a.id+m.id), 200, m.id, l.id, m.couleur)}<span class="num">${i+1}</span></span>${l.titre}</a></li>`).join("")}</ul>
     <div class="seeall">${more > 0 ? `Voir les ${m.lecons.length} leçons` : "Voir la matière"} <span>→</span></div>
     <span class="glare"></span>
   </div>`;
@@ -638,9 +820,12 @@ function renderMatiere(r, a, m){
     <section id="lecons">
       <div class="lesson-cards">${m.lecons.map((l,i) => `
         <a class="lesson-card tilt" data-tilt="9" href="#${r.id}--${l.id}" style="--c:${m.couleur}">
+          <span class="lphoto">${img(lessonPhoto(m, i, a.id+m.id), 600, m.id, l.id, m.couleur)}</span>
           <span class="bignum depth-2">${String(i+1).padStart(2,"0")}</span>
-          <span class="lt depth-1">${l.titre}</span>
-          <span class="soon-tag depth-1">Bientôt disponible</span>
+          <span class="lbody">
+            <span class="lt depth-1">${l.titre}</span>
+            <span class="soon-tag depth-1">Bientôt disponible</span>
+          </span>
           <span class="glare"></span>
         </a>`).join("")}
       </div>
@@ -660,8 +845,10 @@ function renderLesson(r, found){
   setBackground(m.photo, m.id, a.id+"-"+m.id, m.couleur);
   shell(`<div class="kicker"><a href="#${r.id}">${r.titre}</a> · ${a.titre} · <a href="#${r.id}--${m.page}">${m.titre}</a></div><h1>${l.titre}</h1>`);
   renderLeft(r, { annee:a.id, page:m.page, lesson:l.id });
+  const anec = ANECDOTES[hash(l.id) % ANECDOTES.length];
   $("main").innerHTML = `
     <article class="lesson">
+      <div class="cover">${img(lessonPhoto(m, idx, a.id+m.id), 1400, m.id, l.id, m.couleur)}</div>
       <div class="content">
         <div class="breadcrumb"><a href="#accueil">Accueil</a> › <a href="#${r.id}">${r.titre}</a> › ${a.titre} › <a href="#${r.id}--${m.page}">${m.titre}</a></div>
         <div class="meta"><span class="tag">${a.court}</span><span class="tag">${m.titre}</span><span class="tag">Leçon ${idx+1} / ${list.length}</span></div>
@@ -669,18 +856,23 @@ function renderLesson(r, found){
         <div class="rule"></div>
         <h2 id="bientot">Bientôt disponible</h2>
         <p>Cette leçon est en cours de préparation. Elle sera bientôt accessible avec son cours, sa vidéo et ses exercices corrigés.</p>
+        <h2 id="pause">✨ Une petite pause ?</h2>
+        <div class="flips one">${anecdoteCard(anec, "l")}</div>
         <div class="pager">
           ${prev ? `<a href="#${r.id}--${prev.id}"><small>‹ Précédent</small>${prev.titre}</a>` : `<a href="#${r.id}--${m.page}"><small>‹ Retour</small>Toutes les leçons</a>`}
           ${next ? `<a href="#${r.id}--${next.id}" style="text-align:right"><small>Suivant ›</small>${next.titre}</a>` : ""}
         </div>
       </div>
     </article>`;
-  renderRight([{id:"bientot", titre:"Bientôt disponible"}]);
+  renderRight([{id:"bientot", titre:"Bientôt disponible"},{id:"pause", titre:"Une petite pause"}]);
+  bindFlips($("main"));
 }
 
 function route(){
   if (heroAnim) { cancelAnimationFrame(heroAnim); heroAnim = null; }
-  const [rid, sub] = location.hash.slice(1).split("--");
+  const h = location.hash.slice(1);
+  if (h === "anecdotes") { renderAnecdotes(); $("topnav").classList.remove("open"); window.scrollTo({top:0}); return; }
+  const [rid, sub] = h.split("--");
   const r = SITE.find(x => x.id === rid);
   if (!r) renderHome();
   else if (!sub) renderRubrique(r);
