@@ -345,7 +345,7 @@ const MATIERES = {
 const PHOTO = id => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=`;
 
 const SITE = [
-  { id:"college", titre:"Collège", couleur:"#1f8a70", photo:11200121, intro:"De la 6e à la 3e : les notions essentielles pour réussir le brevet.",
+  { id:"college", titre:"Collège", couleur:"#1f8a70", photo:30596225, intro:"De la 6e à la 3e : les notions essentielles pour réussir le brevet.",
     annees:[
       { id:"6e", titre:"Sixième", court:"6e", matieres:{
         "mathematiques":{ photo:29264971, lecons:["Les nombres entiers et décimaux","Comparer et ranger les décimaux","Les fractions","Addition et soustraction","Multiplication et division","Les angles","Le cercle","Périmètres et aires","La symétrie axiale"] },
@@ -379,7 +379,7 @@ const SITE = [
         "physique-chimie":{ photo:7425345, lecons:["La mécanique de Newton","Le mouvement dans un champ","La cinétique chimique","Les équilibres acide-base","Ondes et diffraction","La thermodynamique"] },
         "svt":{ photo:17181272, lecons:["Génétique et évolution","Le climat de la Terre","La communication nerveuse","Le domaine continental","La plante domestiquée"] } }}
     ]},
-  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:4102557, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
+  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:6432109, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
     annees:[
       { id:"bac1", titre:"1re année (Bac+1)", court:"Bac+1", matieres:{
         "langage-c":{ photo:546819, lecons:["Variables, types et opérateurs","Conditions et boucles","Fonctions","Entrées et sorties","Le débogage"] },
@@ -655,28 +655,68 @@ function enableTilt(root){
 /* ===================== Surface 3D animée (accueil) ===================== */
 let heroAnim = null;
 function startHero(canvas){
-  const ctx = canvas.getContext("2d"); let t = 0, mx = 0, my = 0;
+  const ctx = canvas.getContext("2d"); let t = 0, mx = 0, my = 0, rot = 0;
   const N = 34, S = 3.2;
   const resize = () => { const dpr = Math.min(2, devicePixelRatio||1); canvas.width = canvas.clientWidth*dpr; canvas.height = canvas.clientHeight*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); };
   resize(); addEventListener("resize", resize);
   canvas.parentElement.addEventListener("mousemove", e => { const r = canvas.getBoundingClientRect(); mx = (e.clientX - r.left)/r.width - .5; my = (e.clientY - r.top)/r.height - .5; });
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   function f(x,y){ const r = Math.hypot(x,y); return Math.cos(r*2.4 - t)*Math.exp(-r*.35)*.9 + .25*Math.sin(x*1.3+t*.6)*Math.cos(y*1.1); }
+
+  // --- Texture de la Terre (continents générés une seule fois) ---
+  const TW = 256, TH = 128, tex = new Uint8ClampedArray(TW*TH*3);
+  const R0 = rng(20261119), blobs = Array.from({length:34}, () => [R0()*2*Math.PI, (R0()-.5)*2.2, .09+R0()*.2]);
+  for (let j=0;j<TH;j++) for (let i=0;i<TW;i++){
+    const lon = i/TW*2*Math.PI, lat = (j/TH-.5)*Math.PI; let v = 0;
+    for (const [bl, bt, br] of blobs){ let dl = Math.abs(lon-bl); dl = Math.min(dl, 2*Math.PI-dl); const dd = (dl*Math.cos(lat))**2 + (lat-bt*.7)**2; v += Math.exp(-dd/(br*br)); }
+    v += .12*Math.sin(lon*7+lat*5)*Math.cos(lat*9);
+    let c;
+    if (Math.abs(lat) > 1.22) c = [235,242,250];
+    else if (v > .7) c = v > 1.45 ? [186,160,110] : [60+30*Math.abs(lat),140-20*Math.abs(lat),70];
+    else { const k = Math.min(1, v*1.3); c = [20+30*k, 80+60*k, 170+45*k]; }
+    tex.set(c, (j*TW+i)*3);
+  }
+  const off = document.createElement("canvas"), octx = off.getContext("2d");
+  function drawEarth(cx, cy, R){
+    const D = Math.max(8, Math.round(R*2)); off.width = off.height = D;
+    const im = octx.createImageData(D, D), px = im.data, L = [-.55,-.5,.67];
+    for (let y=0;y<D;y++) for (let x=0;x<D;x++){
+      const u = (x+.5)/D*2-1, v = (y+.5)/D*2-1, q = u*u+v*v; if (q > 1) continue;
+      const z = Math.sqrt(1-q), lat = Math.asin(-v), lon = ((Math.atan2(u, z) + rot) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+      const ti = (Math.floor((lat/Math.PI+.5)*(TH-1))*TW + Math.floor(lon/(2*Math.PI)*(TW-1)))*3;
+      const lit = Math.max(.18, u*L[0] + v*L[1] + z*L[2]), rim = Math.pow(1-z, 3)*.6, o = (y*D+x)*4;
+      px[o]   = Math.min(255, tex[ti]*lit + 90*rim);
+      px[o+1] = Math.min(255, tex[ti+1]*lit + 150*rim);
+      px[o+2] = Math.min(255, tex[ti+2]*lit + 255*rim);
+      px[o+3] = q > .97 ? 255*(1-q)/.03 : 255;
+    }
+    octx.putImageData(im, 0, 0);
+    const g = ctx.createRadialGradient(cx, cy, R*.9, cx, cy, R*1.5);
+    g.addColorStop(0, "rgba(120,190,255,.45)"); g.addColorStop(1, "rgba(120,190,255,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, R*1.5, 0, 2*Math.PI); ctx.fill();
+    ctx.drawImage(off, cx-R, cy-R, 2*R, 2*R);
+  }
+
   function frame(){
     const w = canvas.clientWidth, h = canvas.clientHeight; ctx.clearRect(0,0,w,h);
     const yaw = .7 + t*.08 + mx*.6, pitch = 1.05 + my*.25, cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
     const scale = Math.min(w,h)*.19, ox = w*.5, oy = h*.52;
-    const P = (i,j) => { const x = (i/(N-1)-.5)*2*S, y = (j/(N-1)-.5)*2*S, z = f(x,y);
-      const X = x*cy - y*sy, Y = x*sy + y*cy; const Y2 = Y*cp - z*sp, Z2 = Y*sp + z*cp; const d = 9/(9+Y2*.9);
-      return [ox + X*scale*d, oy - Z2*scale*d*.9 + Y2*scale*.05, Y2, z]; };
-    const pts = []; for(let i=0;i<N;i++){ pts[i]=[]; for(let j=0;j<N;j++) pts[i][j]=P(i,j); }
+    const proj = (x, y, z) => { const X = x*cy - y*sy, Y = x*sy + y*cy; const Y2 = Y*cp - z*sp, Z2 = Y*sp + z*cp; const d = 9/(9+Y2*.9);
+      return [ox + X*scale*d, oy - Z2*scale*d*.9 + Y2*scale*.05, Y2, z, d]; };
+    const pts = []; for(let i=0;i<N;i++){ pts[i]=[]; for(let j=0;j<N;j++){ const x=(i/(N-1)-.5)*2*S, y=(j/(N-1)-.5)*2*S; pts[i][j]=proj(x,y,f(x,y)); } }
+    // La Terre roule sur la surface
+    const er = .5, ex = 1.75*Math.cos(t*.3), ey = 1.75*Math.sin(t*.3), E = proj(ex, ey, f(ex,ey) + er);
+    const ER = Math.min(80, er*scale*E[4]*1.05);
     ctx.lineWidth = 1.1;
-    for(let i=0;i<N;i++) for(let j=0;j<N;j++){ const p = pts[i][j];
-      const a = Math.max(.08, Math.min(.85, .55 - p[2]*.09)); const warm = (p[3]+1)/2;
-      ctx.strokeStyle = `rgba(${242},${Math.round(150+60*warm)},${Math.round(52+120*(1-warm))},${a})`;
-      if(i<N-1){ const q = pts[i+1][j]; ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); }
-      if(j<N-1){ const q = pts[i][j+1]; ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); } }
-    if(!still){ t += .018; heroAnim = requestAnimationFrame(frame); }
+    const seg = (p, q) => { const a = Math.max(.08, Math.min(.85, .55 - p[2]*.09)), warm = (p[3]+1)/2;
+      ctx.strokeStyle = `rgba(242,${Math.round(150+60*warm)},${Math.round(52+120*(1-warm))},${a})`;
+      ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]); ctx.stroke(); };
+    for (const pass of [0,1]){
+      for(let i=0;i<N;i++) for(let j=0;j<N;j++){ const p = pts[i][j]; if ((p[2] > E[2]) !== (pass === 0)) continue;
+        if(i<N-1) seg(p, pts[i+1][j]); if(j<N-1) seg(p, pts[i][j+1]); }
+      if (pass === 0) drawEarth(E[0], E[1], ER);
+    }
+    if(!still){ t += .018; rot += .012; heroAnim = requestAnimationFrame(frame); }
   }
   frame();
 }
