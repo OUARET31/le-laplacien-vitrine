@@ -379,7 +379,7 @@ const SITE = [
         "physique-chimie":{ photo:7425345, lecons:["La mécanique de Newton","Le mouvement dans un champ","La cinétique chimique","Les équilibres acide-base","Ondes et diffraction","La thermodynamique"] },
         "svt":{ photo:17181272, lecons:["Génétique et évolution","Le climat de la Terre","La communication nerveuse","Le domaine continental","La plante domestiquée"] } }}
     ]},
-  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:40270826, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
+  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:34007243, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
     annees:[
       { id:"bac1", titre:"1re année (Bac+1)", court:"Bac+1", matieres:{
         "langage-c":{ photo:546819, lecons:["Variables, types et opérateurs","Conditions et boucles","Fonctions","Entrées et sorties","Le débogage"] },
@@ -405,8 +405,8 @@ const SITE = [
 
 
 
-// Photos à montrer en entier (dézoomées) avec un fond flou
-const CONTAIN = new Set([10424708, 716398, 9907285]);
+// Cadrage de certaines photos (partie de l'image à garder visible)
+const POS = { 9907285:"50% 30%", 10424708:"50% 80%", 716398:"50% 45%" };
 
 /* ===================== Dessins originaux des anecdotes ===================== */
 const SKY = (id, a, b) => `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="300" fill="url(#${id})"/>`;
@@ -730,10 +730,9 @@ const PREVIEW = 3; // leçons affichées sur la carte d'une matière
 // Image avec repli automatique sur l'illustration générée si la photo ne charge pas
 function img(photoId, w, fallbackMat, seed, couleur, cls="", noFit=false){
   const fb = encodeURIComponent(art(fallbackMat, seed, couleur)).replace(/'/g,'%27');
-  const tag = (c, extra="") => `<img class="${c}" src="${PHOTO(photoId)}${w}" alt="" loading="lazy" decoding="async" ${extra}
+  const pos = POS[photoId] ? `style="object-position:${POS[photoId]}"` : "";
+  return `<img class="${cls}" src="${PHOTO(photoId)}${w}" alt="" loading="lazy" decoding="async" ${pos}
     onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,${fb}'">`;
-  if (!noFit && CONTAIN.has(photoId)) return `<span class="fitbox">${tag("fbg",'aria-hidden="true"')}${tag(cls+" ffg")}</span>`;
-  return tag(cls);
 }
 
 // Fond plein écran : photo estompée vers le bas, effet de profondeur
