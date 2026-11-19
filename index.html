@@ -261,13 +261,25 @@
   .fshade{position:absolute;inset:0;background:linear-gradient(to top, rgba(10,14,32,.92) 10%, rgba(10,14,32,.2) 60%, transparent)}
   .face.front h3{position:absolute;left:18px;right:18px;bottom:44px;margin:0;color:#fff;font-size:22px;line-height:1.25;text-shadow:0 2px 10px rgba(0,0,0,.5)}
   .fhint{position:absolute;left:18px;bottom:16px;color:var(--gold);font-size:13px;font-weight:700}
-  .fcat{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+  .fcat{position:absolute;top:14px;left:14px;background:rgba(15,22,48,.6);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);color:#fff;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
   .fcat.dark{position:static;display:inline-block;background:#efe9fb;border-color:#e0d4f7;color:#5b21b6;margin-bottom:8px}
   .face.back{transform:rotateY(180deg);background:linear-gradient(160deg,#fff 0%,#f6f1ff 100%);padding:20px;display:flex;flex-direction:column;overflow:auto}
   .face.back h3{margin:0 0 8px;font-size:19px;color:var(--ink)}
   .face.back p{margin:0 0 12px;font-size:14.5px;color:var(--text)}
   .sci{margin-top:auto;background:#fff8e6;border:1px solid #f1dfae;border-radius:12px;padding:10px 12px;font-size:13.5px}
   #filters a.on{background:var(--gold);color:var(--ink)}
+
+
+  /* ---------- v4 : photo dézoomée, dessins, cartes leçons colorées ---------- */
+  .fitbox{position:relative;display:block;width:100%;height:100%;overflow:hidden}
+  .fitbox .fbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(16px) brightness(.75);transform:scale(1.2)}
+  .art.photo .fitbox .ffg{position:relative;object-fit:contain!important;transform:none!important}
+  .draw,.draw svg{width:100%;height:100%;display:block}
+  .lesson-card{padding:20px;min-height:170px;background:linear-gradient(145deg,#fff 0%, color-mix(in srgb, var(--c) 14%, #fff) 100%)}
+  .lesson-card .bignum{position:static;background:var(--c);color:#fff;font-size:28px;padding:6px 12px;border-radius:12px;align-self:flex-start;
+    box-shadow:0 5px 0 color-mix(in srgb, var(--c) 60%, #000), 0 12px 20px rgba(0,0,0,.18);transform:rotate(-4deg)}
+  .lesson-card .lbody{padding:14px 0 0}
+  .lesson-card:hover .bignum{transform:rotate(0) scale(1.08)}
 
   footer{background:var(--ink);color:#aab1d0;text-align:center;font-size:14px;padding:26px}
   footer b{color:#fff;font-family:Fraunces,serif;letter-spacing:.08em}
@@ -338,36 +350,36 @@ const SITE = [
       { id:"6e", titre:"Sixième", court:"6e", matieres:{
         "mathematiques":{ photo:29264971, lecons:["Les nombres entiers et décimaux","Comparer et ranger les décimaux","Les fractions","Addition et soustraction","Multiplication et division","Les angles","Le cercle","Périmètres et aires","La symétrie axiale"] },
         "physique-chimie":{ photo:8544960, lecons:["La matière qui nous entoure","Mélanges et solutions","Les états de l'eau","Masse et volume","Les sources d'énergie"] },
-        "svt":{ photo:529527, lecons:["Classer le vivant","Les besoins des plantes","La cellule, unité du vivant","Le développement des êtres vivants","Les êtres vivants dans leur milieu"] } }},
+        "svt":{ photo:9907285, lecons:["Classer le vivant","Les besoins des plantes","La cellule, unité du vivant","Le développement des êtres vivants","Les êtres vivants dans leur milieu"] } }},
       { id:"5e", titre:"Cinquième", court:"5e", matieres:{
-        "mathematiques":{ photo:6692914, lecons:["Les nombres relatifs","Les priorités opératoires","La proportionnalité","Les triangles","Les parallélogrammes","Les statistiques","Comparer et additionner des fractions"] },
+        "mathematiques":{ photo:10285260, lecons:["Les nombres relatifs","Les priorités opératoires","La proportionnalité","Les triangles","Les parallélogrammes","Les statistiques","Comparer et additionner des fractions"] },
         "physique-chimie":{ photo:1495580, lecons:["Les états de la matière","Les changements d'état","Le circuit électrique","Conducteurs et isolants","Le son"] },
         "svt":{ photo:1200225, lecons:["La respiration des êtres vivants","Nutrition et digestion","Le sang et la circulation","Les roches et les paysages","La météo et le climat"] } }},
       { id:"4e", titre:"Quatrième", court:"4e", matieres:{
         "mathematiques":{ photo:6256066, lecons:["Le théorème de Pythagore","Les puissances","Le calcul littéral","Les équations","Multiplier et diviser des fractions","Les translations","Pyramides et cônes"] },
         "physique-chimie":{ photo:10424708, lecons:["Atomes et molécules","Les transformations chimiques","Vitesse et mouvement","La lumière","Tension et intensité","Les lois de l'électricité"] },
-        "svt":{ photo:6307488, lecons:["Séismes et volcans","La tectonique des plaques","La reproduction humaine","Le système nerveux","Les micro-organismes"] } }},
+        "svt":{ photo:33878825, lecons:["Séismes et volcans","La tectonique des plaques","La reproduction humaine","Le système nerveux","Les micro-organismes"] } }},
       { id:"3e", titre:"Troisième", court:"3e", matieres:{
         "mathematiques":{ photo:714699, lecons:["Les fonctions","Les fonctions affines","Le théorème de Thalès","La trigonométrie","Les probabilités","L'arithmétique","Les homothéties"] },
         "physique-chimie":{ photo:716398, lecons:["L'énergie électrique","Puissance et énergie","Les ions et le pH","La gravitation","Le poids et la masse"] },
-        "svt":{ photo:4033019, lecons:["Génétique et ADN","L'hérédité","Le système immunitaire","L'évolution des espèces","Alimentation et santé"] } }}
+        "svt":{ photo:17057524, lecons:["Génétique et ADN","L'hérédité","Le système immunitaire","L'évolution des espèces","Alimentation et santé"] } }}
     ]},
-  { id:"lycee", titre:"Lycée", couleur:"#2443b8", photo:4033300, intro:"Seconde, Première et Terminale : approfondir et préparer le bac.",
+  { id:"lycee", titre:"Lycée", couleur:"#2443b8", photo:8326459, intro:"Seconde, Première et Terminale : approfondir et préparer le bac.",
     annees:[
       { id:"2de", titre:"Seconde", court:"2de", matieres:{
         "mathematiques":{ photo:22690750, lecons:["Nombres et intervalles","Les fonctions de référence","Les vecteurs","Les équations de droites","Les statistiques","Les probabilités","Algorithmique en Python"] },
         "physique-chimie":{ photo:3845162, lecons:["Lumière et spectres","Mouvement et forces","Les solutions aqueuses","La structure de l'atome","Les transformations physiques","Les signaux sonores"] },
-        "svt":{ photo:256262, lecons:["La cellule","La biodiversité","Le métabolisme","Les sols et l'agriculture","Reproduction et sexualité"] } }},
+        "svt":{ photo:12558370, lecons:["La cellule","La biodiversité","Le métabolisme","Les sols et l'agriculture","Reproduction et sexualité"] } }},
       { id:"1re", titre:"Première", court:"1re", matieres:{
-        "mathematiques":{ photo:22690751, lecons:["Le second degré","La dérivation","Les suites","Le produit scalaire","La fonction exponentielle","Les probabilités conditionnelles"] },
+        "mathematiques":{ photo:28492548, lecons:["Le second degré","La dérivation","Les suites","Le produit scalaire","La fonction exponentielle","Les probabilités conditionnelles"] },
         "physique-chimie":{ photo:10187634, lecons:["Énergie et travail","Les ondes mécaniques","L'oxydo-réduction","La cohésion de la matière","Lentilles et images"] },
-        "svt":{ photo:5721685, lecons:["L'expression du génome","Les mutations de l'ADN","La tectonique des plaques","Les écosystèmes","Le système immunitaire"] } }},
+        "svt":{ photo:15156692, lecons:["L'expression du génome","Les mutations de l'ADN","La tectonique des plaques","Les écosystèmes","Le système immunitaire"] } }},
       { id:"tle", titre:"Terminale", court:"Tle", matieres:{
         "mathematiques":{ photo:6238050, lecons:["Limites et continuité","Le logarithme népérien","Les intégrales","Les nombres complexes","La géométrie dans l'espace","Les lois de probabilité"] },
         "physique-chimie":{ photo:7425345, lecons:["La mécanique de Newton","Le mouvement dans un champ","La cinétique chimique","Les équilibres acide-base","Ondes et diffraction","La thermodynamique"] },
-        "svt":{ photo:30596249, lecons:["Génétique et évolution","Le climat de la Terre","La communication nerveuse","Le domaine continental","La plante domestiquée"] } }}
+        "svt":{ photo:17181272, lecons:["Génétique et évolution","Le climat de la Terre","La communication nerveuse","Le domaine continental","La plante domestiquée"] } }}
     ]},
-  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:34007243, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
+  { id:"superieur", titre:"Supérieur", couleur:"#c2410c", photo:4102557, intro:"BTS, BUT, licence et écoles d'ingénieurs : programmation, électronique et conception numérique.",
     annees:[
       { id:"bac1", titre:"1re année (Bac+1)", court:"Bac+1", matieres:{
         "langage-c":{ photo:546819, lecons:["Variables, types et opérateurs","Conditions et boucles","Fonctions","Entrées et sorties","Le débogage"] },
@@ -392,64 +404,145 @@ const SITE = [
 ];
 
 
-// Réserves de photos par matière (pour illustrer chaque leçon)
-const POOLS = {
-  "mathematiques":  [29264971,6692914,6256066,714699,22690750,22690751,6238050,311269,11200121,6990047,209224,7580753],
-  "physique-chimie":[8544960,1495580,10424708,716398,3845162,10187634,7425345,8442647,10187137,3825573,954585,8325983],
-  "svt":            [529527,1200225,6307488,4033019,256262,5721685,30596249,9907285,2563455,4594030,4414868,2233992,230864,30596225,30596276,12904927,4031654,4033145],
-  "langage-c":      [546819,10816120,965345,6424584,6424589,36571389],
-  "python":         [6424584,36571389,6424589,546819,965345,10816120],
-  "electronique":   [32894960,18471567,6636476,2105927,6432109,34007243,2182863,6636477,32894980],
-  "fpga-vhdl":      [209711,11272008,40270826,6636477,2105927,6432109,2182863]
+
+// Photos à montrer en entier (dézoomées) avec un fond flou
+const CONTAIN = new Set([10424708, 716398, 9907285]);
+
+/* ===================== Dessins originaux des anecdotes ===================== */
+const SKY = (id, a, b) => `<defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="400" height="300" fill="url(#${id})"/>`;
+const STARS = n => Array.from({length:n},(_,i)=>`<circle cx="${(i*73)%400}" cy="${(i*41)%170}" r="${1+(i%3)*.6}" fill="#fff" opacity="${.4+(i%4)*.15}"/>`).join("");
+const DRAW = {
+  flamel: () => SKY("s1","#2b1d4e","#6b3fa0") + STARS(18) + `
+    <rect x="110" y="120" width="180" height="150" fill="#d9c7a1" stroke="#5b4630" stroke-width="4"/>
+    <path d="M100 125 200 55 300 125Z" fill="#8a5a3c" stroke="#5b4630" stroke-width="4"/>
+    <rect x="180" y="200" width="40" height="70" rx="20" fill="#5b4630"/>
+    <rect x="130" y="150" width="34" height="34" fill="#ffe08a" stroke="#5b4630" stroke-width="3"/><rect x="236" y="150" width="34" height="34" fill="#ffe08a" stroke="#5b4630" stroke-width="3"/>
+    <text x="200" y="110" text-anchor="middle" font-family="Georgia" font-size="16" fill="#fff">1407</text>
+    <path d="M318 200h20l-4 22 18 40h-48l18-40z" fill="#7cf0c8" stroke="#fff" stroke-width="3"/><circle cx="325" cy="190" r="5" fill="#fff" opacity=".7"/><circle cx="333" cy="178" r="3" fill="#fff" opacity=".6"/>`,
+  or: () => SKY("s2","#1b2a5c","#0e1430") + `
+    <g fill="#f5c542" stroke="#a87b10" stroke-width="3"><path d="M120 230h80l-12-34h-56z"/><path d="M200 230h80l-12-34h-56z"/><path d="M160 196h80l-12-34h-56z"/></g>
+    <g fill="none" stroke="#7ad7ff" stroke-width="3"><ellipse cx="300" cy="90" rx="60" ry="20"/><ellipse cx="300" cy="90" rx="60" ry="20" transform="rotate(60 300 90)"/><ellipse cx="300" cy="90" rx="60" ry="20" transform="rotate(-60 300 90)"/></g>
+    <circle cx="300" cy="90" r="10" fill="#ff7a59"/><text x="120" y="100" font-family="Georgia" font-size="40" fill="#f5c542">Au</text><text x="110" y="135" font-family="Georgia" font-size="22" fill="#7ad7ff">Bi → Au</text>`,
+  chouette: () => SKY("s3","#0f1f4a","#3b5bab") + STARS(20) + `<circle cx="320" cy="70" r="36" fill="#fff4c2"/>
+    <path d="M40 250 Q200 230 380 255" stroke="#5b3a1e" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <ellipse cx="200" cy="175" rx="62" ry="78" fill="#a9744a"/><ellipse cx="200" cy="195" rx="40" ry="50" fill="#e8cfa6"/>
+    <path d="M150 110 160 85 180 108ZM250 110 240 85 220 108Z" fill="#a9744a"/>
+    <circle cx="176" cy="140" r="24" fill="#fff"/><circle cx="224" cy="140" r="24" fill="#fff"/><circle cx="176" cy="140" r="13" fill="#f5a623"/><circle cx="224" cy="140" r="13" fill="#f5a623"/><circle cx="176" cy="140" r="7" fill="#111"/><circle cx="224" cy="140" r="7" fill="#111"/>
+    <path d="M192 160 200 176 208 160Z" fill="#f5a623"/><path d="M175 248l-6 10M185 250v12M215 250v12M225 248l6 10" stroke="#f5a623" stroke-width="4" stroke-linecap="round"/>
+    <rect x="245" y="200" width="44" height="30" fill="#fff" stroke="#c9302c" stroke-width="3" transform="rotate(-12 267 215)"/>`,
+  mandragore: () => SKY("s4","#cdeccf","#7cc38a") + `<rect y="170" width="400" height="130" fill="#6b4a2b"/>
+    <g fill="#2f8f4e"><path d="M200 175 Q150 100 120 120 Q160 140 200 175"/><path d="M200 175 Q250 95 285 115 Q240 140 200 175"/><path d="M200 175 Q200 80 215 70 Q215 130 200 175"/></g>
+    <g fill="#e5c18f" stroke="#a37a45" stroke-width="3"><ellipse cx="200" cy="215" rx="22" ry="30"/><circle cx="200" cy="180" r="16"/><path d="M182 230 170 270M218 230 230 270M180 205 150 220M220 205 250 220" stroke-width="8" stroke-linecap="round"/></g>
+    <circle cx="194" cy="178" r="2.5" fill="#333"/><circle cx="206" cy="178" r="2.5" fill="#333"/><ellipse cx="200" cy="187" rx="4" ry="5" fill="#333"/>`,
+  cape: () => SKY("s5","#101a3f","#2a3f8f") + STARS(14) + `
+    <path d="M200 60 Q140 80 120 260 L280 260 Q260 80 200 60Z" fill="none" stroke="#9fd8ff" stroke-width="4" stroke-dasharray="10 8"/>
+    <g stroke="#ffd36e" stroke-width="3" fill="none"><path d="M20 120 Q200 30 380 120"/><path d="M20 180 Q200 300 380 180"/><path d="M20 150h80M300 150h80"/></g>
+    <g fill="#fff"><path d="M120 110l4 10 10 4-10 4-4 10-4-10-10-4 10-4z"/><path d="M290 210l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></g>`,
+  phenix: () => SKY("s6","#ffb347","#c0392b") + `
+    <g><path d="M200 170 Q110 60 40 110 Q110 120 150 170Z" fill="#ffdd57"/><path d="M200 170 Q290 60 360 110 Q290 120 250 170Z" fill="#ffdd57"/>
+    <path d="M200 170 Q130 90 70 140 Q130 140 160 175Z" fill="#ff7b2e"/><path d="M200 170 Q270 90 330 140 Q270 140 240 175Z" fill="#ff7b2e"/>
+    <ellipse cx="200" cy="175" rx="26" ry="40" fill="#e8442e"/><circle cx="200" cy="125" r="16" fill="#e8442e"/><path d="M214 124 232 130 214 134Z" fill="#ffdd57"/><circle cx="205" cy="121" r="3" fill="#111"/>
+    <path d="M185 212 Q160 270 140 285 M200 215 Q200 270 200 290 M215 212 Q240 270 260 285" stroke="#ffdd57" stroke-width="8" fill="none" stroke-linecap="round"/></g>`,
+  miroir: () => SKY("s7","#f6e7ff","#c9a7ef") + `
+    <ellipse cx="200" cy="150" rx="88" ry="115" fill="#e9b949" stroke="#9c6f12" stroke-width="5"/><ellipse cx="200" cy="150" rx="70" ry="96" fill="#dff3ff"/>
+    <path d="M150 90 Q170 70 190 80" stroke="#fff" stroke-width="8" stroke-linecap="round" fill="none"/>
+    <g fill="#9c6f12"><circle cx="200" cy="30" r="10"/><circle cx="110" cy="150" r="7"/><circle cx="290" cy="150" r="7"/></g>
+    <path d="M165 170h70M220 155l15 15-15 15" stroke="#6b5bd6" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+  pantoufle: () => SKY("s8","#24345f","#6f8fd9") + STARS(16) + `
+    <path d="M90 210 Q100 150 170 160 Q230 170 280 200 Q320 215 330 230 L330 245 Q220 245 110 245 Q85 240 90 210Z" fill="#bfe8ff" fill-opacity=".75" stroke="#fff" stroke-width="4"/>
+    <path d="M290 245 l10 0 l-6 30 h-8z" fill="#bfe8ff" stroke="#fff" stroke-width="3"/><path d="M120 190 Q150 175 190 182" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <g fill="#fff"><path d="M300 90l5 12 12 5-12 5-5 12-5-12-12-5 12-5z"/><path d="M90 100l3 8 8 3-8 3-3 8-3-8-8-3 8-3z"/></g>`,
+  yexian: () => SKY("s9","#9be7e0","#2c8fa3") + `
+    <path d="M0 200 Q100 185 200 200 T400 200V300H0Z" fill="#1e6f86"/>
+    <g transform="translate(100 225)"><ellipse rx="52" ry="22" fill="#ff8a3d"/><path d="M48 0 78-20 78 20Z" fill="#ff8a3d"/><circle cx="-30" cy="-5" r="5" fill="#fff"/><circle cx="-30" cy="-5" r="2.5" fill="#111"/><path d="M-10-20 Q0-34 12-20" fill="#ffb27a"/></g>
+    <path d="M220 130 Q230 90 280 98 Q320 106 345 125 Q360 135 362 148 Q300 150 230 150Q215 145 220 130Z" fill="#f5c542" stroke="#a87b10" stroke-width="4"/>
+    <g fill="#fff"><path d="M330 60l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/></g><text x="90" y="70" font-family="Georgia" font-size="26" fill="#0b3b4a">~ 850</text>`,
+  citrouille: () => SKY("s10","#1d1a4a","#5a3f8f") + STARS(16) + `
+    <ellipse cx="200" cy="160" rx="110" ry="80" fill="#ff8c1a"/><path d="M150 85 Q130 160 150 238M200 80V240M250 85 Q270 160 250 238" stroke="#d96b00" stroke-width="5" fill="none"/>
+    <rect x="160" y="125" width="80" height="55" rx="10" fill="#ffd36e" stroke="#d96b00" stroke-width="4"/><path d="M200 82 Q205 60 222 55" stroke="#2f8f4e" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <g fill="none" stroke="#f5c542" stroke-width="6"><circle cx="120" cy="245" r="32"/><circle cx="280" cy="245" r="32"/></g><g stroke="#f5c542" stroke-width="3"><path d="M88 245h64M120 213v64M248 245h64M280 213v64"/></g>`,
+  pomme: () => SKY("s11","#2a0f1f","#5c1a33") + `
+    <path d="M200 105 Q150 70 110 110 Q70 170 120 240 Q160 290 200 260 Q240 290 280 240 Q330 170 290 110 Q250 70 200 105Z" fill="#e0262f"/>
+    <path d="M200 105 Q205 80 215 62" stroke="#5b3a1e" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M212 75 Q250 50 270 70 Q245 90 212 75Z" fill="#2f8f4e"/>
+    <path d="M135 140 Q140 120 160 112" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" opacity=".6"/>
+    <path d="M290 200 q10 18 0 26 q-10-8 0-26" fill="#7cf0c8"/>`,
+  grimm: () => SKY("s12","#3a2a1a","#7a5530") + `
+    <path d="M60 230 Q130 200 200 230 Q270 200 340 230V250 Q270 222 200 250 Q130 222 60 250Z" fill="#f3e6c8" stroke="#5b4630" stroke-width="3"/>
+    <path d="M200 230V250" stroke="#5b4630" stroke-width="3"/>
+    <g fill="#2a1d10"><rect x="150" y="130" width="100" height="90"/><rect x="140" y="100" width="24" height="120"/><rect x="236" y="100" width="24" height="120"/><path d="M136 100 152 70 168 100ZM232 100 248 70 264 100Z"/><rect x="185" y="185" width="30" height="35" rx="15" fill="#f5c542"/></g>
+    <text x="200" y="285" text-anchor="middle" font-family="Georgia" font-size="22" fill="#f3e6c8">1812</text>`,
+  rouet: () => SKY("s13","#3b2a5e","#8a6bc6") + `
+    <circle cx="170" cy="150" r="80" fill="none" stroke="#c48a4a" stroke-width="8"/><g stroke="#c48a4a" stroke-width="5">${Array.from({length:8},(_,i)=>`<path d="M170 150 L${(170+80*Math.cos(i*Math.PI/4)).toFixed(0)} ${(150+80*Math.sin(i*Math.PI/4)).toFixed(0)}"/>`).join("")}</g>
+    <circle cx="170" cy="150" r="10" fill="#7a5530"/><path d="M120 280 170 150 230 280M90 280h170" stroke="#7a5530" stroke-width="8" fill="none"/>
+    <path d="M250 120 Q300 150 320 230 Q330 260 360 270" stroke="#f5c542" stroke-width="5" fill="none"/><path d="M300 90 Q320 110 315 140" stroke="#e8d27a" stroke-width="4" fill="none"/>`,
+  painepices: () => SKY("s14","#ffe1ec","#ffb3c7") + `
+    <rect x="120" y="140" width="160" height="120" fill="#b5651d"/><path d="M100 150 200 70 300 150Z" fill="#8b4513"/>
+    <path d="M100 150 200 70 300 150" stroke="#fff" stroke-width="10" fill="none" stroke-dasharray="2 14" stroke-linecap="round"/>
+    <rect x="180" y="200" width="40" height="60" rx="20" fill="#5a2d0c"/><rect x="140" y="165" width="34" height="30" fill="#ffd36e" stroke="#fff" stroke-width="4"/><rect x="226" y="165" width="34" height="30" fill="#ffd36e" stroke="#fff" stroke-width="4"/>
+    <g>${["#ff4d6d","#4dd2ff","#7ee36b","#ffd23f"].map((c,i)=>`<circle cx="${140+i*40}" cy="130" r="8" fill="${c}"/>`).join("")}</g>
+    <path d="M300 230 a14 14 0 1 1 28 0 v30 h-28z" fill="#fff" stroke="#e05" stroke-width="4" stroke-dasharray="6 6"/>`,
+  haricot: () => SKY("s15","#bfe9ff","#7fc8f8") + `
+    <g fill="#fff"><ellipse cx="300" cy="50" rx="60" ry="22"/><ellipse cx="260" cy="60" rx="40" ry="18"/></g><rect y="270" width="400" height="30" fill="#6fbf4a"/>
+    <path d="M190 300 Q240 240 190 190 Q140 140 200 100 Q260 60 240 20" stroke="#2f8f4e" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <g fill="#4caf50">${[[215,250],[170,200],[220,150],[175,115],[245,70],[230,35]].map(([x,y],i)=>`<path d="M${x} ${y} q${i%2?-30:30} -12 ${i%2?-40:40} 6 q${i%2?20:-20} 12 ${i%2?40:-40} -6z"/>`).join("")}</g>`,
+  chaperon: () => SKY("s16","#14301f","#2f6b45") + `
+    <g fill="#0d2416"><path d="M20 300 60 120 100 300Z"/><path d="M300 300 345 100 390 300Z"/></g>
+    <path d="M200 70 Q140 90 135 200 Q130 260 150 270 L250 270 Q270 260 265 200 Q260 90 200 70Z" fill="#d7263d"/>
+    <circle cx="200" cy="130" r="30" fill="#f2c9a0"/><path d="M170 120 Q200 80 230 120" fill="#d7263d"/>
+    <rect x="240" y="220" width="60" height="38" rx="8" fill="#c48a4a"/><path d="M248 222 Q270 190 292 222" stroke="#7a5530" stroke-width="5" fill="none"/>
+    <g fill="#ffe66d"><circle cx="70" cy="200" r="5"/><circle cx="88" cy="200" r="5"/></g>`
 };
 
-// Coin anecdotes (faits vérifiés, rédigés pour le site)
+/* ===================== Anecdotes sur les histoires ===================== */
 const ANECDOTES = [
-  { cat:"Harry Potter", photo:15471785, titre:"Une idée née dans un train en retard",
-    texte:"En 1990, J.K. Rowling est bloquée des heures dans un train entre Manchester et Londres. C'est là que lui vient l'idée d'un garçon qui ignore qu'il est sorcier. Le premier tome, refusé par plusieurs éditeurs, paraîtra finalement en 1997.",
-    science:"Persévérance : même les plus grandes idées demandent des années de travail." },
-  { cat:"Harry Potter", photo:16827795, titre:"Nicolas Flamel a vraiment existé",
-    texte:"Le Flamel cité dans le premier tome est inspiré d'un vrai Parisien du Moyen Âge, que la légende a transformé en alchimiste. Sa maison, construite en 1407 au 51 rue de Montmorency, est considérée comme la plus vieille maison de Paris.",
+  { cat:"Harry Potter", draw:"flamel", titre:"Nicolas Flamel a vraiment existé",
+    texte:"La pierre philosophale de l'histoire est liée à Nicolas Flamel. Ce personnage est inspiré d'un vrai Parisien du Moyen Âge, que la légende a transformé en alchimiste. Sa maison, construite en 1407 au 51 rue de Montmorency, est considérée comme la plus vieille maison de Paris.",
     science:"Chimie : l'alchimie est l'ancêtre de la chimie moderne." },
-  { cat:"Harry Potter", photo:7978061, titre:"Transformer un métal en or ? C'est arrivé en 1980",
-    texte:"Le chimiste Glenn Seaborg a changé quelques milliers d'atomes de bismuth en or grâce à un accélérateur de particules. Le procédé coûte bien plus cher que l'or obtenu : la pierre philosophale reste un rêve !",
+  { cat:"Harry Potter", draw:"or", titre:"Transformer un métal en or ? C'est arrivé en 1980",
+    texte:"La pierre philosophale change les métaux en or. Dans la réalité, le chimiste Glenn Seaborg a changé quelques milliers d'atomes de bismuth en or grâce à un accélérateur de particules… pour un coût bien plus élevé que l'or obtenu !",
     science:"Physique nucléaire : changer le nombre de protons d'un noyau change l'élément chimique." },
-  { cat:"Harry Potter", photo:1543417, titre:"Les chouettes ne tournent pas la tête à 360°",
-    texte:"Leurs yeux sont fixes dans leur crâne : pour regarder autour d'elles, les chouettes tournent la tête jusqu'à environ 270°. Leur cou compte deux fois plus de vertèbres que le nôtre.",
+  { cat:"Harry Potter", draw:"chouette", titre:"Les chouettes ne tournent pas la tête à 360°",
+    texte:"Dans l'histoire, les chouettes livrent le courrier. Dans la nature, leurs yeux sont fixes dans leur crâne : pour regarder autour d'elles, elles tournent la tête jusqu'à environ 270°. Leur cou compte deux fois plus de vertèbres que le nôtre.",
     science:"SVT : une adaptation anatomique au mode de vie de prédateur nocturne." },
-  { cat:"Harry Potter", photo:32478366, titre:"La mandragore est une vraie plante",
-    texte:"La mandragore existe bel et bien. Sa racine, parfois en forme de silhouette humaine, a nourri de nombreuses légendes. Elle est toxique : elle contient des alcaloïdes puissants.",
+  { cat:"Harry Potter", draw:"mandragore", titre:"La mandragore est une vraie plante",
+    texte:"Dans l'histoire, ses cris sont dangereux. La vraie mandragore ne crie pas, mais sa racine a souvent une forme de petite silhouette humaine, d'où les légendes. Elle est toxique : elle contient des alcaloïdes puissants.",
     science:"SVT et chimie : les plantes fabriquent des molécules pour se défendre." },
-  { cat:"Harry Potter", photo:8391461, titre:"Harry et son autrice ont le même anniversaire",
-    texte:"Harry Potter est né un 31 juillet… comme J.K. Rowling. Et le prénom Hermione vient d'une pièce de Shakespeare, Le Conte d'hiver.",
-    science:"Maths : avec 23 personnes dans une classe, il y a plus d'une chance sur deux que deux élèves aient le même anniversaire !" },
-  { cat:"Once Upon a Time", photo:19753171, titre:"Storybrooke n'existe pas… mais on peut s'y promener",
-    texte:"La ville de la série est censée se trouver dans le Maine, aux États-Unis. En réalité, ses rues ont été tournées à Steveston, un village de pêcheurs près de Vancouver, au Canada.",
-    science:"Géographie : le cinéma transforme souvent un lieu réel en un autre." },
-  { cat:"Once Upon a Time", photo:7200443, titre:"Les créateurs venaient de la série Lost",
-    texte:"Once Upon a Time a été imaginée par Edward Kitsis et Adam Horowitz, deux scénaristes de Lost. Elle a duré sept saisons, de 2011 à 2018, en mélangeant tous les contes de fées.",
-    science:"Logique : construire une histoire où tous les personnages se croisent demande un vrai plan, comme un programme." },
-  { cat:"Once Upon a Time", photo:16827797, titre:"Rumplestiltskin, alias le Nain Tracassin",
-    texte:"Ce personnage vient d'un conte des frères Grimm, où il file de la paille pour la changer en or. En français, on l'appelle souvent le Nain Tracassin.",
-    science:"Chimie : la paille est faite surtout de carbone, d'hydrogène et d'oxygène. Aucune réaction chimique ne peut en faire de l'or, qui est un élément." },
-  { cat:"Contes de fées", photo:33928544, titre:"Miroir, mon beau miroir… qui n'inverse pas la gauche et la droite",
+  { cat:"Harry Potter", draw:"cape", titre:"Une cape d'invisibilité… presque réelle",
+    texte:"Des chercheurs fabriquent des « métamatériaux » qui obligent certaines ondes à contourner un petit objet, comme l'eau autour d'un caillou. L'objet devient invisible pour ces ondes (des micro-ondes, par exemple)… mais pas encore pour nos yeux.",
+    science:"Physique : la lumière est une onde, et on peut dévier son trajet." },
+  { cat:"Harry Potter", draw:"phenix", titre:"Le phénix est une légende très ancienne",
+    texte:"L'oiseau qui renaît de ses cendres n'a pas été inventé pour l'histoire : on le trouve déjà dans les légendes de l'Égypte et de la Grèce antiques.",
+    science:"SVT : certains animaux se régénèrent vraiment. L'axolotl, une salamandre, peut refaire une patte entière." },
+  { cat:"Contes de fées", draw:"miroir", titre:"Miroir, mon beau miroir… qui n'inverse pas la gauche et la droite",
     texte:"On dit souvent qu'un miroir inverse la gauche et la droite. En fait, il inverse l'avant et l'arrière : votre main droite reste du côté droit de l'image, mais votre reflet vous fait face.",
     science:"Physique : la réflexion de la lumière sur une surface plane." },
-  { cat:"Contes de fées", photo:11595286, titre:"Pantoufle de verre… ou de vair ?",
+  { cat:"Contes de fées", draw:"pantoufle", titre:"Pantoufle de verre… ou de vair ?",
     texte:"Perrault a bien écrit « pantoufle de verre » en 1697. Au XIXe siècle, Balzac a proposé qu'il s'agissait de « vair », une fourrure, car danser avec du verre semblait impossible. Le débat dure encore !",
     science:"Physique : le verre est rigide et cassant, peu pratique pour danser." },
-  { cat:"Contes de fées", photo:35001488, titre:"La plus vieille Cendrillon est chinoise",
+  { cat:"Contes de fées", draw:"yexian", titre:"La plus vieille Cendrillon est chinoise",
     texte:"L'histoire de Ye Xian, écrite vers l'an 850 en Chine par Duan Chengshi, raconte une jeune fille maltraitée, un poisson magique et une pantoufle d'or perdue lors d'une fête.",
     science:"Histoire : les mêmes contes voyagent et se transforment d'un continent à l'autre." },
-  { cat:"Contes de fées", photo:18674316, titre:"Des citrouilles de plus d'une tonne",
+  { cat:"Contes de fées", draw:"citrouille", titre:"Des citrouilles de plus d'une tonne",
     texte:"Le carrosse de Cendrillon n'est peut-être pas si exagéré : les citrouilles géantes des concours dépassent aujourd'hui une tonne !",
     science:"SVT : la photosynthèse transforme lumière, eau et CO₂ en matière végétale." },
-  { cat:"Contes de fées", photo:3652898, titre:"La pomme empoisonnée de Blanche-Neige",
+  { cat:"Contes de fées", draw:"pomme", titre:"La pomme empoisonnée de Blanche-Neige",
     texte:"Les pépins de pomme contiennent de l'amygdaline, qui peut libérer du cyanure dans l'organisme. Rassurez-vous : il faudrait en croquer une énorme quantité pour être en danger.",
     science:"Chimie : c'est la dose qui fait le poison." },
-  { cat:"Contes de fées", photo:29031148, titre:"Les premiers contes de Grimm n'étaient pas pour les enfants",
-    texte:"Les frères Grimm publient leur premier recueil en 1812. Leurs versions sont parfois très cruelles : à la fin de Blanche-Neige, la reine doit danser avec des souliers de fer chauffés au rouge. Ils étaient aussi de grands spécialistes de la langue allemande.",
-    science:"Langues : les Grimm ont étudié comment les sons des langues évoluent avec le temps." }
+  { cat:"Contes de fées", draw:"rouet", titre:"Changer la paille en or : impossible !",
+    texte:"Dans le conte des frères Grimm, le Nain Tracassin (Rumplestiltskin) file de la paille pour en faire de l'or.",
+    science:"Chimie : la paille est faite surtout de carbone, d'hydrogène et d'oxygène. Aucune réaction chimique ne peut en faire de l'or, qui est un élément." },
+  { cat:"Contes de fées", draw:"painepices", titre:"Pourquoi la maison en pain d'épices est dorée",
+    texte:"Dans Hansel et Gretel, la sorcière vit dans une maison en pain d'épices. Sa belle couleur brune vient de la cuisson : les sucres et les protéines de la pâte réagissent ensemble à la chaleur.",
+    science:"Chimie : c'est la réaction de Maillard, la même qui dore le pain et les frites." },
+  { cat:"Contes de fées", draw:"haricot", titre:"Un haricot géant ? Le bambou fait presque aussi bien",
+    texte:"Dans Jack et le haricot magique, la tige pousse jusqu'aux nuages en une nuit. Dans la réalité, certaines espèces de bambou peuvent grandir de près d'un mètre en une seule journée !",
+    science:"SVT : la croissance des plantes vient de la division et de l'allongement des cellules." },
+  { cat:"Contes de fées", draw:"chaperon", titre:"Chez Perrault, le Petit Chaperon rouge finit mal",
+    texte:"Dans la version de Perrault (1697), le loup mange la fillette et l'histoire s'arrête là, avec une morale. Le chasseur qui la sauve n'apparaît que dans la version des frères Grimm.",
+    science:"Langues : comparer deux versions d'un même texte, c'est déjà faire de l'analyse." },
+  { cat:"Contes de fées", draw:"grimm", titre:"Les premiers contes de Grimm n'étaient pas pour les enfants",
+    texte:"Les frères Grimm publient leur premier recueil en 1812. Leurs versions sont parfois très cruelles : à la fin de Blanche-Neige, la reine doit danser avec des souliers de fer chauffés au rouge.",
+    science:"Langues : les Grimm étaient aussi des savants qui ont étudié l'évolution des sons de la langue allemande." }
 ];
 
 /* ===================== Outils ===================== */
@@ -594,10 +687,12 @@ let spy = null;
 const PREVIEW = 3; // leçons affichées sur la carte d'une matière
 
 // Image avec repli automatique sur l'illustration générée si la photo ne charge pas
-function img(photoId, w, fallbackMat, seed, couleur, cls=""){
+function img(photoId, w, fallbackMat, seed, couleur, cls="", noFit=false){
   const fb = encodeURIComponent(art(fallbackMat, seed, couleur)).replace(/'/g,'%27');
-  return `<img class="${cls}" src="${PHOTO(photoId)}${w}" alt="" loading="lazy" decoding="async"
+  const tag = (c, extra="") => `<img class="${c}" src="${PHOTO(photoId)}${w}" alt="" loading="lazy" decoding="async" ${extra}
     onerror="this.onerror=null;this.src='data:image/svg+xml;charset=utf-8,${fb}'">`;
+  if (!noFit && CONTAIN.has(photoId)) return `<span class="fitbox">${tag("fbg",'aria-hidden="true"')}${tag(cls+" ffg")}</span>`;
+  return tag(cls);
 }
 
 // Fond plein écran : photo estompée vers le bas, effet de profondeur
@@ -605,7 +700,7 @@ let bgHandlers = null;
 function setBackground(photoId, mat, seed, couleur){
   const bg = $("pagebg");
   if (!photoId) { bg.innerHTML = ""; bg.classList.remove("on"); return; }
-  bg.innerHTML = img(photoId, 1920, mat, seed, couleur) + `<div class="tint" style="--c:${couleur}"></div>`;
+  bg.innerHTML = img(photoId, 1920, mat, seed, couleur, "", true) + `<div class="tint" style="--c:${couleur}"></div>`;
   bg.classList.add("on");
   const im = bg.querySelector("img");
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -623,34 +718,17 @@ function setBackground(photoId, mat, seed, couleur){
   apply();
 }
 
-// Photo d'une leçon : prise dans la réserve de sa matière, différente pour chaque leçon d'une même liste
-function lessonPhoto(m, i, seed){
-  const pool = POOLS[m.id] || [m.photo];
-  const start = hash(seed) % pool.length;
-  let p = pool[(start + i) % pool.length];
-  if (p === m.photo && pool.length > 1) p = pool[(start + i + 1) % pool.length];
-  return p;
-}
-
 function renderNav(current){
   $("topnav").innerHTML = `<a href="#accueil" class="${!current?'active':''}">Accueil</a>` +
     SITE.map(r => `<a href="#${r.id}" class="${r.id===current?'active':''}">${r.titre}</a>`).join("") +
     `<a href="#anecdotes" class="${current==='anecdotes'?'active':''}">Anecdotes ✨</a>`;
 }
 
-function marquee(){
-  const all = [...new Set(Object.values(POOLS).flat().concat(ANECDOTES.map(a => a.photo)))];
-  const half = Math.ceil(all.length/2);
-  const row = (list, dir) => `<div class="mrow ${dir}"><div class="mtrack">${[...list, ...list].map(p =>
-    `<div class="mimg">${img(p, 500, "mathematiques", "mq"+p, "#2443b8")}</div>`).join("")}</div></div>`;
-  return `<section class="marquee" aria-hidden="true">${row(all.slice(0, half), "l")}${row(all.slice(half), "r")}</section>`;
-}
-
 function anecdoteCard(a, i){
   return `<div class="flip" tabindex="0" data-cat="${a.cat}" role="button" aria-label="${a.titre}">
     <div class="flip-in">
       <div class="face front">
-        ${img(a.photo, 700, "svt", "an"+i, "#7c3aed")}
+        <div class="draw"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${DRAW[a.draw]()}</svg></div>
         <div class="fshade"></div>
         <span class="fcat">${a.cat}</span>
         <h3>${a.titre}</h3>
@@ -675,7 +753,7 @@ function bindFlips(root){
 
 function renderHome(){
   renderNav(null); setBackground(null);
-  const pick = [ANECDOTES[2], ANECDOTES[10], ANECDOTES[6]];
+  const pick = [ANECDOTES[2], ANECDOTES[9], ANECDOTES[7]];
   $("app").innerHTML = `
     <section class="hero">
       <canvas id="surface" aria-hidden="true"></canvas>
@@ -701,7 +779,6 @@ function renderHome(){
           <span class="glare"></span>
         </a>`; }).join("")}
     </div>
-    ${marquee()}
     <section class="home-anec">
       <div class="home-anec-head"><h2>✨ Le saviez-vous ?</h2><a class="btn3d" href="#anecdotes">Toutes les anecdotes →</a></div>
       <div class="flips">${pick.map((a,i) => anecdoteCard(a, "h"+i)).join("")}</div>
@@ -724,11 +801,11 @@ function renderAnecdotes(){
     <div class="pagehero"><div class="inner">
       <div class="kicker">Pause détente</div>
       <h1><span class="ico3d" style="--c:#7c3aed">✨</span>Le coin anecdotes</h1>
-      <p>Harry Potter, Once Upon a Time, contes de fées… et la science cachée derrière la magie. Cliquez sur une carte pour la retourner.</p>
+      <p>Les histoires de Harry Potter et les contes de fées (ceux que l'on retrouve dans Once Upon a Time)… et la science cachée derrière la magie. Cliquez sur une carte pour la retourner.</p>
       <div class="yearbar" id="filters"><a href="#" data-f="" class="on">Tout</a>${cats.map(c => `<a href="#" data-f="${c}">${c}</a>`).join("")}</div>
     </div></div>
     <div class="anec-wrap"><div class="flips" id="flips">${ANECDOTES.map((a,i) => anecdoteCard(a, i)).join("")}</div>
-    <p class="anec-note">Harry Potter et Once Upon a Time sont des marques de leurs propriétaires respectifs ; ce site n'y est pas affilié. Photos : Pexels.</p></div>`;
+    <p class="anec-note">Dessins originaux réalisés pour LE LAPLACIEN. Harry Potter et Once Upon a Time sont des marques de leurs propriétaires respectifs ; ce site n'y est pas affilié.</p></div>`;
   bindFlips($("app"));
   $("filters").querySelectorAll("a").forEach(b => b.onclick = e => {
     e.preventDefault();
@@ -775,7 +852,7 @@ function subjectCard(r, a, m){
   const more = m.lecons.length - PREVIEW;
   return `<div class="subject tilt" data-tilt="7" data-href="#${r.id}--${m.page}" role="link" tabindex="0" aria-label="${m.titre} ${a.titre}">
     <div class="art photo">${img(m.photo, 900, m.id, a.id+"-"+m.id, m.couleur)}<div class="title depth-1"><span class="ico">${m.ico}</span>${m.titre}</div></div>
-    <ul>${m.lecons.slice(0, PREVIEW).map((l,i) => `<li><a href="#${r.id}--${l.id}"><span class="thumb">${img(lessonPhoto(m, i, a.id+m.id), 200, m.id, l.id, m.couleur)}<span class="num">${i+1}</span></span>${l.titre}</a></li>`).join("")}</ul>
+    <ul>${m.lecons.slice(0, PREVIEW).map((l,i) => `<li><a href="#${r.id}--${l.id}"><span class="num">${i+1}</span>${l.titre}</a></li>`).join("")}</ul>
     <div class="seeall">${more > 0 ? `Voir les ${m.lecons.length} leçons` : "Voir la matière"} <span>→</span></div>
     <span class="glare"></span>
   </div>`;
@@ -820,8 +897,7 @@ function renderMatiere(r, a, m){
     <section id="lecons">
       <div class="lesson-cards">${m.lecons.map((l,i) => `
         <a class="lesson-card tilt" data-tilt="9" href="#${r.id}--${l.id}" style="--c:${m.couleur}">
-          <span class="lphoto">${img(lessonPhoto(m, i, a.id+m.id), 600, m.id, l.id, m.couleur)}</span>
-          <span class="bignum depth-2">${String(i+1).padStart(2,"0")}</span>
+                    <span class="bignum depth-2">${String(i+1).padStart(2,"0")}</span>
           <span class="lbody">
             <span class="lt depth-1">${l.titre}</span>
             <span class="soon-tag depth-1">Bientôt disponible</span>
@@ -848,8 +924,7 @@ function renderLesson(r, found){
   const anec = ANECDOTES[hash(l.id) % ANECDOTES.length];
   $("main").innerHTML = `
     <article class="lesson">
-      <div class="cover">${img(lessonPhoto(m, idx, a.id+m.id), 1400, m.id, l.id, m.couleur)}</div>
-      <div class="content">
+            <div class="content">
         <div class="breadcrumb"><a href="#accueil">Accueil</a> › <a href="#${r.id}">${r.titre}</a> › ${a.titre} › <a href="#${r.id}--${m.page}">${m.titre}</a></div>
         <div class="meta"><span class="tag">${a.court}</span><span class="tag">${m.titre}</span><span class="tag">Leçon ${idx+1} / ${list.length}</span></div>
         <h1>${l.titre}</h1>
