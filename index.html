@@ -719,6 +719,7 @@ function startHero(canvas){
     if(!still){ t += .018; rot += .012; heroAnim = requestAnimationFrame(frame); }
   }
   frame();
+  if (still) { addEventListener("resize", () => { resize(); frame(); }); setTimeout(() => { resize(); frame(); }, 400); }
 }
 
 /* ===================== Rendu des pages ===================== */
