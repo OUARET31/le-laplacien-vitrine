@@ -72,7 +72,7 @@
   .btn3d:hover{color:var(--ink);transform:translateY(2px);box-shadow:0 3px 0 #a86f0e, 0 8px 16px rgba(0,0,0,.3)}
   .btn3d.ghost{background:rgba(255,255,255,.08);color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.2)}
 
-  .levels{max-width:1180px;margin:-80px auto 80px;padding:0 4vw;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;position:relative;z-index:2}
+  .levels{max-width:1180px;margin:-80px auto 80px;padding:0 4vw;display:grid;grid-template-columns:repeat(2,1fr);gap:26px;position:relative;z-index:2}
 
   /* Cartes 3D inclinables */
   .tilt{transform-style:preserve-3d;transition:transform .25s ease, box-shadow .25s ease;will-change:transform;position:relative}
@@ -326,6 +326,53 @@
     article.lesson .content{padding:22px 20px} article.lesson .cover{height:180px}
   }
   @media (prefers-reduced-motion:reduce){ .mtrack{animation:none}  .bg3d .floor,.bg3d .shape{animation:none} .tilt{transition:none} }
+  /* Vidéos en carré */
+  .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin:14px 0 8px}
+  .vsq{margin:0;display:block;text-decoration:none;color:inherit}
+  .vsq .vframe{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#0d1328;box-shadow:0 14px 30px -14px rgba(18,26,51,.55)}
+  .vsq iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .vsq figcaption{font-size:.9rem;font-weight:600;margin-top:8px}
+  .soonv .vframe{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:22px;text-align:center;color:#fff;
+    background:radial-gradient(120% 90% at 30% 20%, color-mix(in srgb,var(--c) 70%,#fff 0%), #121a33 75%);transition:transform .25s}
+  .soonv:hover .vframe{transform:translateY(-3px)}
+  .soonv .play{width:64px;height:64px;border-radius:50%;background:#ff0033;display:grid;place-items:center;font-size:1.5rem;box-shadow:0 10px 24px -8px #ff0033}
+  .soonv small{opacity:.8;font-size:.82rem}
+  .ytlink{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;color:var(--ink);margin:4px 0 8px;text-decoration:none}
+  .ytlink:hover{text-decoration:underline}
+  .yticon.sm{width:26px;height:26px;border-radius:8px;background:#ff0033;display:inline-grid;place-items:center;flex:none}
+  .tabpane[hidden]{display:none!important}
+  /* Onglets de niveau */
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
+  .tab{border:1px solid #e3e6ef;background:#fff;border-radius:999px;padding:8px 16px;font:600 .9rem Inter,sans-serif;cursor:pointer;color:#3b4256}
+  .tab span{display:inline-block;min-width:20px;padding:0 6px;margin-left:4px;border-radius:999px;background:#eef0f6;font-size:.78rem}
+  .tab.on{color:#fff;border-color:transparent}
+  .tab.on.n-facile{background:#1f8a70}.tab.on.n-intermediaire{background:#d97706}.tab.on.n-difficile{background:#c0262d}
+  .tab.on span{background:rgba(255,255,255,.25)}
+  .exo.hp{border-left:4px solid #7c3aed;background:linear-gradient(90deg,#f6f1ff,#fff 60%)}
+  .perso{display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#7c3aed;background:#efe7ff;border-radius:6px;padding:2px 8px;margin-bottom:6px}
+  .hp-intro{color:#5b6275;margin-top:-4px}
+  /* Quiz */
+  .quiz{display:grid;gap:14px;margin-top:10px}
+  .qscore{justify-self:end;background:#121a33;color:#fff;border-radius:999px;padding:6px 16px;font-size:.9rem;position:sticky;top:76px;z-index:2}
+  .qscore b{color:#f2b134}
+  .qcard{border:1px solid #e6e8f0;border-radius:16px;padding:16px 18px;background:#fff;transition:border-color .2s}
+  .qcard.ok{border-color:#1f8a70}.qcard.ko{border-color:#c0262d}
+  .qhead{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .qn{width:26px;height:26px;border-radius:8px;background:#121a33;color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:700}
+  .qtype{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#2443b8}
+  .qniv{font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 8px;color:#fff}
+  .qniv.n-facile{background:#1f8a70}.qniv.n-intermediaire{background:#d97706}.qniv.n-difficile{background:#c0262d}
+  .qq p{margin:4px 0 10px}
+  .qopts{display:grid;gap:8px}.qopts.vf{grid-template-columns:1fr 1fr}
+  .qopt{text-align:left;border:1px solid #dfe3ee;background:#f8f9fc;border-radius:12px;padding:10px 14px;font:500 .95rem Inter,sans-serif;cursor:pointer;color:var(--ink)}
+  .qopt:hover:not(:disabled){border-color:#2443b8;background:#eef2ff}
+  .qopt.good{background:#e3f6ef;border-color:#1f8a70;color:#0f5a47;font-weight:700}
+  .qopt.bad{background:#fde8e8;border-color:#c0262d;color:#8a1c22}
+  .qtrou{display:flex;gap:8px}.qtrou input{flex:1;border:1px solid #dfe3ee;border-radius:12px;padding:10px 14px;font:500 1rem Inter,sans-serif}
+  .qok,.qreset{border:0;border-radius:12px;background:#2443b8;color:#fff;padding:10px 16px;font:600 .92rem Inter,sans-serif;cursor:pointer}
+  .qreset{justify-self:start;background:#eef0f6;color:#121a33}
+  .qfb{margin-top:10px;padding:10px 14px;border-radius:12px;background:#f6f7fb;font-size:.93rem}
+  .qfb p{display:inline;margin:0}
 </style>
 </head>
 <body>
@@ -359,9 +406,13 @@
 
 <footer><b>LE LAPLACIEN</b> · © <span id="year"></span> · Cours et exercices du collège au supérieur</footer>
 
+<script src="contenu/_outils.js"></script>
 <script src="contenu/6e-mathematiques.js"></script>
 <script src="contenu/6e-physique-chimie.js"></script>
 <script src="contenu/6e-svt.js"></script>
+<script src="contenu/6e-mathematiques-exercices.js"></script>
+<script src="contenu/6e-physique-chimie-exercices.js"></script>
+<script src="contenu/6e-svt-exercices.js"></script>
 <script>
 /* =====================================================================
    PLAN DU SITE : rubriques → années → matières → leçons
@@ -373,7 +424,10 @@ const MATIERES = {
   "langage-c":      { titre:"Langage C", ico:"C", couleur:"#4b5bd6" },
   "python":         { titre:"Python", ico:"Py", couleur:"#0e7490" },
   "electronique":   { titre:"Électronique / Microélectronique", ico:"Ω", couleur:"#b45309" },
-  "fpga-vhdl":      { titre:"FPGA / VHDL", ico:"⌗", couleur:"#7c3aed" }
+  "fpga-vhdl":      { titre:"FPGA / VHDL", ico:"⌗", couleur:"#7c3aed" },
+  "verilog":        { titre:"Verilog", ico:"V", couleur:"#be185d" },
+  "systemverilog":  { titre:"SystemVerilog", ico:"SV", couleur:"#0f766e" },
+  "gestion-projet": { titre:"Gestion de projet", ico:"✓", couleur:"#a16207" }
 };
 
 // Photos libres de droits (Pexels, usage commercial gratuit) : identifiant de la photo
@@ -435,6 +489,30 @@ const SITE = [
         "langage-c":{ photo:32894980, lecons:["Le C embarqué sur microcontrôleur","Les systèmes temps réel","L'optimisation du code"] },
         "electronique":{ photo:2105927, lecons:["Conception de circuits intégrés","Du schéma au layout","Vérification et test","Les circuits analogiques intégrés"] },
         "fpga-vhdl":{ photo:2182863, lecons:["Contraintes de timing","Système sur puce (SoC) sur FPGA","La synthèse haut niveau","Le traitement du signal sur FPGA"] } }}
+    ]}
+  ,{ id:"ingenierie", titre:"Ingénierie numérique", couleur:"#5b21b6", photo:36169774, intro:"Programmation, conception de circuits numériques et gestion de projet : un parcours complet, du premier programme au système sur puce.",
+    annees:[
+      { id:"ing1", titre:"Débutant", court:"Débutant", matieres:{
+        "python":{ photo:11035474, lecons:["Installer Python et écrire son premier programme","Variables et types","Conditions et boucles","Les fonctions","Listes et dictionnaires"] },
+        "langage-c":{ photo:5483077, lecons:["Compiler son premier programme","Types, variables et opérateurs","Conditions et boucles en C","Les fonctions en C","Les tableaux"] },
+        "fpga-vhdl":{ photo:14887693, lecons:["Qu'est-ce qu'un FPGA ?","La logique combinatoire","Entité et architecture","Signaux et types","Premier projet : faire clignoter une LED"] },
+        "verilog":{ photo:6636463, lecons:["Introduction à Verilog","Modules et ports","wire et reg","Opérateurs et assign","Logique combinatoire avec always"] },
+        "systemverilog":{ photo:6636497, lecons:["De Verilog à SystemVerilog","Les types logic, bit et enum","always_comb et always_ff","Structures et packages","Les interfaces"] },
+        "gestion-projet":{ photo:7580842, lecons:["Qu'est-ce qu'un projet ?","Le cahier des charges","Découper un projet en tâches","Le planning et le diagramme de Gantt","Travailler en équipe"] } }},
+      { id:"ing2", titre:"Confirmé", court:"Confirmé", matieres:{
+        "python":{ photo:4976710, lecons:["La programmation orientée objet","Fichiers, CSV et JSON","Modules et environnements virtuels","Tester avec pytest","Gérer les erreurs"] },
+        "langage-c":{ photo:2764993, lecons:["Les pointeurs","Les chaînes de caractères","Structures et unions","L'allocation dynamique","Les fichiers en C"] },
+        "fpga-vhdl":{ photo:34924856, lecons:["Les processus","Bascules et registres","Compteurs et diviseurs d'horloge","Les machines à états en VHDL","Testbench et simulation"] },
+        "verilog":{ photo:18734704, lecons:["La logique séquentielle","Affectations bloquantes et non bloquantes","Les machines à états en Verilog","Paramètres et generate","Le testbench Verilog"] },
+        "systemverilog":{ photo:34924858, lecons:["Classes et programmation objet","La randomisation contrainte","Les assertions (SVA)","La couverture fonctionnelle","Construire un testbench"] },
+        "gestion-projet":{ photo:6991339, lecons:["Les méthodes agiles et Scrum","Estimer les charges et les délais","La gestion des risques","Git et la gestion de versions","Suivre un budget"] } }},
+      { id:"ing3", titre:"Expert", court:"Expert", matieres:{
+        "python":{ photo:1921326, lecons:["La programmation asynchrone","Le calcul scientifique avec NumPy","Piloter du matériel en Python","Performance et profilage","Packager et publier un projet"] },
+        "langage-c":{ photo:18734769, lecons:["Opérations bit à bit et registres","Le C embarqué sur microcontrôleur","Interruptions et temps réel","Makefile et compilation séparée","Déboguer avec GDB et Valgrind"] },
+        "fpga-vhdl":{ photo:40342988, lecons:["Les contraintes de timing","Mémoires et FIFO","Les domaines d'horloge multiples","Interfaces UART, SPI et I2C","Le système sur puce (SoC)"] },
+        "verilog":{ photo:270549, lecons:["La conception synchrone robuste","Mémoires et FIFO en Verilog","Les interfaces de communication","Synthèse et optimisation","Du Verilog au FPGA"] },
+        "systemverilog":{ photo:5118460, lecons:["Introduction à UVM","Agents, drivers et moniteurs","Les séquences UVM","Scoreboard et vérification","La méthodologie de vérification"] },
+        "gestion-projet":{ photo:7869118, lecons:["Piloter un projet industriel","Le cycle en V et l'ingénierie système","Qualité et normes","Manager une équipe","Communication et reporting"] } }}
     ]}
 ];
 
@@ -1025,6 +1103,90 @@ function videoButton(c, m){
     <span><b>▶ ${label}</b><small>S'ouvre sur YouTube</small></span></a>`;
 }
 
+/* ---------- Vidéos en carré ---------- */
+function videoSquares(c, m){
+  const vids = (c && c.videos) ? c.videos.filter(v => v.id) : [];
+  if (c && c.video && !vids.length){ const id = (c.video.match(/(?:v=|youtu\.be\/|shorts\/)([\w-]{11})/)||[])[1]; if (id) vids.push({id, titre:"Vidéo de la leçon"}); }
+  const sq = vids.map(v => `<figure class="vsq"><div class="vframe"><iframe src="https://www.youtube-nocookie.com/embed/${v.id}?rel=0" title="${v.titre||'Vidéo'}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div><figcaption>${v.titre||""}</figcaption></figure>`);
+  if (!sq.length) sq.push(`<a class="vsq soonv" href="${CHAINE_YOUTUBE}" target="_blank" rel="noopener" style="--c:${m.couleur}"><div class="vframe"><span class="play">▶</span><b>La vidéo arrive bientôt</b><small>Abonne-toi à la chaîne LE LAPLACIEN pour être prévenu</small></div></a>`);
+  return `<div class="vgrid">${sq.join("")}</div>
+    <a class="ytlink" href="${CHAINE_YOUTUBE}" target="_blank" rel="noopener"><span class="yticon sm"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>Toutes les vidéos sur la chaîne YouTube LE LAPLACIEN</a>`;
+}
+
+/* ---------- Exercices par niveau ---------- */
+const NIV = [["facile","🟢 Facile"],["intermediaire","🟠 Intermédiaire"],["difficile","🔴 Difficile"]];
+function exoCard(e, i, hp){
+  return `<div class="exo ${hp?'hp':''}"><div class="exq"><span class="exn">${i+1}</span><div>${e.perso ? `<span class="perso">${e.perso}</span>` : ""}${md(e.q)}</div></div>
+    <details><summary>Voir la correction</summary><div class="exr">${md(e.r)}</div></details></div>`;
+}
+function niveauxTabs(items, key, hp){
+  const groups = NIV.map(([k,t]) => [k, t, items.filter(e => (e.niveau||"intermediaire") === k)]).filter(g => g[2].length);
+  if (!groups.length) return "";
+  return `<div class="tabs" data-tabs="${key}">${groups.map((g,i) => `<button class="tab ${i?'':'on'} n-${g[0]}" data-k="${g[0]}">${g[1]} <span>${g[2].length}</span></button>`).join("")}</div>
+    ${groups.map((g,i) => `<div class="exos tabpane" data-k="${g[0]}" ${i?'hidden':''}>${g[2].map((e,j) => exoCard(e, j, hp)).join("")}</div>`).join("")}`;
+}
+function exosParNiveau(c){
+  const n = c.niveaux || {};
+  const all = [].concat((n.facile||[]).map(e => ({...e, niveau:"facile"})),
+                        (c.exercices||[]).map(e => ({...e, niveau:e.niveau||"intermediaire"})),
+                        (n.intermediaire||[]).map(e => ({...e, niveau:"intermediaire"})),
+                        (n.difficile||[]).map(e => ({...e, niveau:"difficile"})));
+  return niveauxTabs(all, "ex", false);
+}
+function bindTabs(root){
+  root.querySelectorAll(".tabs").forEach(t => t.querySelectorAll(".tab").forEach(b => b.onclick = () => {
+    t.querySelectorAll(".tab").forEach(x => x.classList.toggle("on", x === b));
+    let p = t.nextElementSibling; while (p && p.classList.contains("tabpane")){ p.hidden = p.dataset.k !== b.dataset.k; p = p.nextElementSibling; }
+  }));
+}
+
+/* ---------- Quiz (QCM, vrai/faux, réponse à écrire) ---------- */
+const norm = t => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/,/g,".").replace(/\s+/g,"").replace(/[°²³]/g,m=>m);
+function quizHtml(qs, key){
+  if (!qs || !qs.length) return "";
+  return `<div class="quiz" data-total="${qs.length}"><div class="qscore">Score : <b>0</b> / ${qs.length}</div>
+    ${qs.map((q,i) => {
+      const type = q.rep ? "trou" : (q.choix && q.choix.length === 2 && q.choix[0] === "Vrai") ? "vf" : "qcm";
+      const lab = {qcm:"QCM", vf:"Vrai ou faux", trou:"À toi d'écrire"}[type];
+      const zone = type === "trou"
+        ? `<div class="qtrou"><input type="text" aria-label="Ta réponse" placeholder="Ta réponse…"><button class="qok">Vérifier</button></div>`
+        : `<div class="qopts ${type}">${q.choix.map((o,j) => `<button class="qopt" data-j="${j}">${md(o).replace(/^<p>|<\/p>$/g,"")}</button>`).join("")}</div>`;
+      return `<div class="qcard" data-i="${i}" data-type="${type}" data-bonne="${q.bonne ?? ""}" data-rep="${(q.rep||[]).join("¦").replace(/"/g,"&quot;")}">
+        <div class="qhead"><span class="qn">${i+1}</span><span class="qtype">${lab}</span>${q.niveau ? `<span class="qniv n-${q.niveau}">${{facile:"Facile",intermediaire:"Intermédiaire",difficile:"Difficile"}[q.niveau]}</span>` : ""}</div>
+        <div class="qq">${md(q.q)}</div>${zone}
+        <div class="qfb" hidden></div>
+        <template>${md(q.pourquoi || "")}</template></div>`; }).join("")}
+    <button class="qreset">↺ Recommencer le quiz</button></div>`;
+}
+function bindQuiz(root){
+  root.querySelectorAll(".quiz").forEach(Q => {
+    let score = 0;
+    const upd = () => Q.querySelector(".qscore b").textContent = score;
+    const done = (card, ok, extra) => {
+      card.classList.add("done", ok ? "ok" : "ko"); if (ok) score++; upd();
+      const fb = card.querySelector(".qfb"); fb.hidden = false;
+      fb.innerHTML = `<b>${ok ? "✅ Bravo !" : "❌ Pas tout à fait."}</b> ${extra||""}${card.querySelector("template").innerHTML}`;
+    };
+    Q.querySelectorAll(".qcard").forEach(card => {
+      if (card.dataset.type === "trou"){
+        const inp = card.querySelector("input"), go = () => {
+          if (card.classList.contains("done") || !inp.value.trim()) return;
+          const reps = card.dataset.rep.split("¦"), ok = reps.some(r => norm(r) === norm(inp.value));
+          inp.disabled = true; done(card, ok, ok ? "" : `La réponse attendue : <b>${reps[0]}</b>. `);
+        };
+        card.querySelector(".qok").onclick = go; inp.onkeydown = e => { if (e.key === "Enter") go(); };
+      } else card.querySelectorAll(".qopt").forEach(b => b.onclick = () => {
+        if (card.classList.contains("done")) return;
+        const good = +card.dataset.bonne, j = +b.dataset.j;
+        card.querySelectorAll(".qopt").forEach(x => { x.disabled = true; if (+x.dataset.j === good) x.classList.add("good"); });
+        if (j !== good) b.classList.add("bad");
+        done(card, j === good);
+      });
+    });
+    Q.querySelector(".qreset").onclick = () => { const k = Q.outerHTML; const tmp = document.createElement("div"); tmp.innerHTML = k; tmp.querySelectorAll(".qcard").forEach(c => { c.classList.remove("done","ok","ko"); c.querySelector(".qfb").hidden = true; c.querySelectorAll(".qopt").forEach(x => { x.disabled = false; x.classList.remove("good","bad"); }); const i = c.querySelector("input"); if (i){ i.disabled = false; i.value = ""; } }); tmp.querySelector(".qscore b").textContent = 0; const n = tmp.firstElementChild; Q.replaceWith(n); bindQuiz(n.parentElement); };
+  });
+}
+
 function renderLesson(r, found){
   const { l, a, m, idx, list } = found;
   const prev = list[idx-1], next = list[idx+1];
@@ -1039,22 +1201,29 @@ function renderLesson(r, found){
     body = `
       <h2 id="objectifs">🎯 Objectifs</h2>
       <ul class="goals">${c.objectifs.map(o => `<li>${o}</li>`).join("")}</ul>
-      ${videoButton(c, m)}
+      <h2 id="videos">🎬 Vidéos</h2>
+      ${videoSquares(c, m)}
       <h2 id="cours">📘 Le cours</h2>
       <div class="lesson-body">${md(c.cours)}</div>
       <h2 id="exemple">🔎 Exemple</h2>
       <div class="example">${md(c.exemple)}</div>
       <h2 id="exercices">✏️ Exercices</h2>
-      <div class="exos">${c.exercices.map((e,i) => `
-        <div class="exo"><div class="exq"><span class="exn">${i+1}</span><div>${md(e.q)}</div></div>
-          <details><summary>Voir la correction</summary><div class="exr">${md(e.r)}</div></details></div>`).join("")}</div>
+      ${exosParNiveau(c)}
+      <h2 id="quiz">🧠 Quiz</h2>
+      ${quizHtml(c.quiz, "q-"+l.id)}
+      ${c.poudlard && c.poudlard.length ? `<h2 id="poudlard">⚡ Exercices à Poudlard</h2>
+      <p class="hp-intro">Les mêmes notions… dans le monde des sorciers. Choisis ton niveau et aide les personnages de la saga !</p>
+      ${niveauxTabs(c.poudlard, "hp", true)}` : ""}
       <h2 id="retenir">⭐ À retenir</h2>
       <ul class="retenir">${c.retenir.map(x => `<li>${md(x).replace(/^<p>|<\/p>$/g,"")}</li>`).join("")}</ul>`;
-    toc = [{id:"objectifs",titre:"Objectifs"},{id:"cours",titre:"Le cours"},{id:"exemple",titre:"Exemple"},{id:"exercices",titre:"Exercices"},{id:"retenir",titre:"À retenir"},{id:"pause",titre:"Une petite pause"}];
+    toc = [{id:"objectifs",titre:"Objectifs"},{id:"videos",titre:"Vidéos"},{id:"cours",titre:"Le cours"},{id:"exemple",titre:"Exemple"},{id:"exercices",titre:"Exercices"}]
+      .concat(c.quiz && c.quiz.length ? [{id:"quiz",titre:"Quiz"}] : [])
+      .concat(c.poudlard && c.poudlard.length ? [{id:"poudlard",titre:"Exercices à Poudlard"}] : [])
+      .concat([{id:"retenir",titre:"À retenir"},{id:"pause",titre:"Une petite pause"}]);
   } else {
     body = `<h2 id="bientot">Bientôt disponible</h2>
-      <p>Cette leçon est en cours de préparation. Elle sera bientôt accessible avec son cours, sa vidéo et ses exercices corrigés.</p>
-      ${videoButton(null, m)}`;
+      <p>Cette leçon est en cours de préparation. Elle sera bientôt accessible avec son cours, ses vidéos, ses quiz et ses exercices corrigés.</p>
+      ${videoSquares(null, m)}`;
     toc = [{id:"bientot", titre:"Bientôt disponible"},{id:"pause", titre:"Une petite pause"}];
   }
   $("main").innerHTML = `
@@ -1074,7 +1243,7 @@ function renderLesson(r, found){
       </div>
     </article>`;
   renderRight(toc);
-  bindFlips($("main"));
+  bindFlips($("main")); bindQuiz($("main")); bindTabs($("main"));
 }
 
 function route(){
