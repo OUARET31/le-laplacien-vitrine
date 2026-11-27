@@ -1,7 +1,7 @@
 {
   "rewrites": [ { "source": "/stats", "destination": "/api/stats" } ],
   "headers": [
-    { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] },
+    { "source": "/contenu/(.*)", "headers": [ { "key": "Cache-Control", "value": "private, no-store" } ] },
     { "source": "/media/(.*)", "headers": [ { "key": "Access-Control-Allow-Origin", "value": "*" } ] }
   ]
 }
