@@ -281,6 +281,38 @@
   .lesson-card .lbody{padding:14px 0 0}
   .lesson-card:hover .bignum{transform:rotate(0) scale(1.08)}
 
+
+  /* ---------- Leçons rédigées ---------- */
+  .goals{margin:0 0 6px;padding-left:22px}
+  .goals li{margin:4px 0}
+  .ytbtn{display:flex;align-items:center;gap:14px;margin:18px 0 6px;padding:14px 18px;border-radius:16px;color:var(--ink);
+    background:linear-gradient(135deg,#fff 0%,#fff1f1 100%);border:1px solid #ffd6d6;box-shadow:0 5px 0 #f3c1c1, 0 14px 28px rgba(200,0,0,.12);transition:transform .15s}
+  .ytbtn:hover{transform:translateY(-2px);color:var(--ink)}
+  .ytbtn .yticon{width:52px;height:38px;border-radius:12px;background:#ff0000;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 0 #b30000}
+  .ytbtn b{display:block;font-size:16px}
+  .ytbtn small{color:var(--muted);font-weight:400}
+  .lesson-body h3{font-size:19px;margin:22px 0 8px;color:var(--ink)}
+  .lesson-body p,.example p{margin:8px 0}
+  .tbl{overflow-x:auto;margin:12px 0}
+  .tbl table{border-collapse:collapse;width:100%;font-size:15px}
+  .tbl th{background:var(--ink);color:#fff;font-weight:600;padding:8px 10px;text-align:left}
+  .tbl td{border-bottom:1px solid var(--line);padding:8px 10px}
+  .tbl tr:nth-child(even) td{background:#faf8f3}
+  .note{background:#fff8e6;border-left:4px solid var(--gold);padding:10px 14px;border-radius:0 10px 10px 0;margin:14px 0}
+  .example{background:#eef3ff;border:1px solid #d6e0ff;border-radius:14px;padding:10px 18px}
+  .exos{display:flex;flex-direction:column;gap:12px}
+  .exo{border:1px solid var(--line);border-radius:14px;padding:12px 16px;background:#fff}
+  .exq{display:flex;gap:12px;align-items:flex-start}
+  .exq p{margin:2px 0}
+  .exn{width:28px;height:28px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 3px 0 #070b1c}
+  .exo details{margin:8px 0 0 40px}
+  .exo summary{cursor:pointer;color:var(--blue);font-weight:600;font-size:14px}
+  .exr{background:#e8f6f2;border-radius:10px;padding:6px 12px;margin-top:8px}
+  .exr p{margin:4px 0}
+  .retenir{background:linear-gradient(135deg,#fff8e6,#fff);border:1px solid #f1dfae;border-radius:14px;padding:14px 18px 14px 36px}
+  .retenir li{margin:6px 0}
+  .soon-tag.ok{color:#14805e}
+
   footer{background:var(--ink);color:#aab1d0;text-align:center;font-size:14px;padding:26px}
   footer b{color:#fff;font-family:Fraunces,serif;letter-spacing:.08em}
 
@@ -327,6 +359,9 @@
 
 <footer><b>LE LAPLACIEN</b> · © <span id="year"></span> · Cours et exercices du collège au supérieur</footer>
 
+<script src="contenu/6e-mathematiques.js"></script>
+<script src="contenu/6e-physique-chimie.js"></script>
+<script src="contenu/6e-svt.js"></script>
 <script>
 /* =====================================================================
    PLAN DU SITE : rubriques → années → matières → leçons
@@ -911,7 +946,7 @@ function renderRubrique(r){
   shell(`<div class="kicker">Rubrique</div><h1>${r.titre}</h1><p>${r.intro}</p>
     <div class="yearbar">${r.annees.map(a => `<a href="#" data-target="annee-${a.id}">${a.titre}</a>`).join("")}</div>`);
   renderLeft(r, null);
-  $("main").innerHTML = `<div class="soon"><strong>Lancement prochainement :</strong> les leçons, vidéos et exercices de cette rubrique arrivent bientôt sur LE LAPLACIEN.</div>` +
+  $("main").innerHTML = `<div class="soon">${r.id==="college" ? "<strong>Nouveau :</strong> toutes les leçons de Sixième sont disponibles, avec exercices corrigés ! Les autres niveaux arrivent bientôt." : "<strong>Lancement prochainement :</strong> les leçons, vidéos et exercices de cette rubrique arrivent bientôt sur LE LAPLACIEN."}</div>` +
     r.annees.map(a => `
     <section class="year" id="annee-${a.id}">
       <div class="year-head">
@@ -940,7 +975,7 @@ function renderMatiere(r, a, m){
                     <span class="bignum depth-2">${String(i+1).padStart(2,"0")}</span>
           <span class="lbody">
             <span class="lt depth-1">${l.titre}</span>
-            <span class="soon-tag depth-1">Bientôt disponible</span>
+            ${contenuDe(a, m, l) ? `<span class="soon-tag ok depth-1">✓ Leçon disponible</span>` : `<span class="soon-tag depth-1">Bientôt disponible</span>`}
           </span>
           <span class="glare"></span>
         </a>`).join("")}
@@ -954,23 +989,82 @@ function renderMatiere(r, a, m){
   bindCards($("main")); enableTilt($("main"));
 }
 
+// Adresse de la chaîne YouTube LE LAPLACIEN (bouton vidéo des leçons)
+const CHAINE_YOUTUBE = "https://www.youtube.com/@LeLaplacien";
+window.CONTENU = window.CONTENU || {};
+const contenuDe = (a, m, l) => (CONTENU[a.id] && CONTENU[a.id][m.id] && CONTENU[a.id][m.id][l.titre]) || null;
+
+// Mini-mise en forme du texte des leçons (### titre, **gras**, listes, tableaux, encadrés)
+function md(text){
+  const esc = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  const lines = String(text).trim().split("\n"); let out = "", i = 0;
+  while (i < lines.length){
+    const L = lines[i].trim();
+    if (!L){ i++; continue; }
+    if (L.startsWith("### ")){ out += `<h3>${inline(L.slice(4))}</h3>`; i++; continue; }
+    if (L.startsWith("|")){
+      const rows = []; while (i < lines.length && lines[i].trim().startsWith("|")){ const t = lines[i].trim(); if (!/^\|[\s\-:|]+\|$/.test(t)) rows.push(t.slice(1,-1).split("|").map(c => c.trim())); i++; }
+      out += `<div class="tbl"><table><thead><tr>${rows[0].map(c=>`<th>${inline(c)}</th>`).join("")}</tr></thead><tbody>${rows.slice(1).map(r=>`<tr>${r.map(c=>`<td>${inline(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+      continue;
+    }
+    if (/^- /.test(L)){ let li=""; while (i < lines.length && /^- /.test(lines[i].trim())){ li += `<li>${inline(lines[i].trim().slice(2))}</li>`; i++; } out += `<ul>${li}</ul>`; continue; }
+    if (/^\d+\. /.test(L)){ let li=""; while (i < lines.length && /^\d+\. /.test(lines[i].trim())){ li += `<li>${inline(lines[i].trim().replace(/^\d+\. /,""))}</li>`; i++; } out += `<ol>${li}</ol>`; continue; }
+    if (L.startsWith("> ")){ out += `<div class="note">💡 ${inline(L.slice(2))}</div>`; i++; continue; }
+    let p = L; i++; while (i < lines.length && lines[i].trim() && !/^(### |\||- |\d+\. |> )/.test(lines[i].trim())){ p += " " + lines[i].trim(); i++; }
+    out += `<p>${inline(p)}</p>`;
+  }
+  return out;
+}
+
+function videoButton(c, m){
+  const url = (c && c.video) ? c.video : CHAINE_YOUTUBE;
+  const label = (c && c.video) ? "Regarder la vidéo explicative" : "Voir les vidéos sur la chaîne YouTube LE LAPLACIEN";
+  return `<a class="ytbtn" href="${url}" target="_blank" rel="noopener" style="--c:${m.couleur}">
+    <span class="yticon"><svg viewBox="0 0 24 24" width="26" height="26"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+    <span><b>▶ ${label}</b><small>S'ouvre sur YouTube</small></span></a>`;
+}
+
 function renderLesson(r, found){
   const { l, a, m, idx, list } = found;
   const prev = list[idx-1], next = list[idx+1];
+  const c = contenuDe(a, m, l);
   renderNav(r.id);
   setBackground(m.photo, m.id, a.id+"-"+m.id, m.couleur);
   shell(`<div class="kicker"><a href="#${r.id}">${r.titre}</a> · ${a.titre} · <a href="#${r.id}--${m.page}">${m.titre}</a></div><h1>${l.titre}</h1>`);
   renderLeft(r, { annee:a.id, page:m.page, lesson:l.id });
   const anec = ANECDOTES[hash(l.id) % ANECDOTES.length];
+  let body, toc;
+  if (c){
+    body = `
+      <h2 id="objectifs">🎯 Objectifs</h2>
+      <ul class="goals">${c.objectifs.map(o => `<li>${o}</li>`).join("")}</ul>
+      ${videoButton(c, m)}
+      <h2 id="cours">📘 Le cours</h2>
+      <div class="lesson-body">${md(c.cours)}</div>
+      <h2 id="exemple">🔎 Exemple</h2>
+      <div class="example">${md(c.exemple)}</div>
+      <h2 id="exercices">✏️ Exercices</h2>
+      <div class="exos">${c.exercices.map((e,i) => `
+        <div class="exo"><div class="exq"><span class="exn">${i+1}</span><div>${md(e.q)}</div></div>
+          <details><summary>Voir la correction</summary><div class="exr">${md(e.r)}</div></details></div>`).join("")}</div>
+      <h2 id="retenir">⭐ À retenir</h2>
+      <ul class="retenir">${c.retenir.map(x => `<li>${md(x).replace(/^<p>|<\/p>$/g,"")}</li>`).join("")}</ul>`;
+    toc = [{id:"objectifs",titre:"Objectifs"},{id:"cours",titre:"Le cours"},{id:"exemple",titre:"Exemple"},{id:"exercices",titre:"Exercices"},{id:"retenir",titre:"À retenir"},{id:"pause",titre:"Une petite pause"}];
+  } else {
+    body = `<h2 id="bientot">Bientôt disponible</h2>
+      <p>Cette leçon est en cours de préparation. Elle sera bientôt accessible avec son cours, sa vidéo et ses exercices corrigés.</p>
+      ${videoButton(null, m)}`;
+    toc = [{id:"bientot", titre:"Bientôt disponible"},{id:"pause", titre:"Une petite pause"}];
+  }
   $("main").innerHTML = `
     <article class="lesson">
-            <div class="content">
+      <div class="content">
         <div class="breadcrumb"><a href="#accueil">Accueil</a> › <a href="#${r.id}">${r.titre}</a> › ${a.titre} › <a href="#${r.id}--${m.page}">${m.titre}</a></div>
         <div class="meta"><span class="tag">${a.court}</span><span class="tag">${m.titre}</span><span class="tag">Leçon ${idx+1} / ${list.length}</span></div>
         <h1>${l.titre}</h1>
         <div class="rule"></div>
-        <h2 id="bientot">Bientôt disponible</h2>
-        <p>Cette leçon est en cours de préparation. Elle sera bientôt accessible avec son cours, sa vidéo et ses exercices corrigés.</p>
+        ${body}
         <h2 id="pause">✨ Une petite pause ?</h2>
         <div class="flips one">${anecdoteCard(anec, "l")}</div>
         <div class="pager">
@@ -979,7 +1073,7 @@ function renderLesson(r, found){
         </div>
       </div>
     </article>`;
-  renderRight([{id:"bientot", titre:"Bientôt disponible"},{id:"pause", titre:"Une petite pause"}]);
+  renderRight(toc);
   bindFlips($("main"));
 }
 
