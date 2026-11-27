@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<meta name="robots" content="noindex,nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LE LAPLACIEN — Cours de sciences du collège au supérieur</title>
@@ -1281,7 +1282,11 @@ function renderLesson(r, found){
   bindFlips($("main")); bindQuiz($("main")); bindTabs($("main"));
 }
 
+// Statistiques : signale chaque page consultée (voir /stats)
+function suivi(){ try { fetch("/api/track", { method:"POST", headers:{ "Content-Type":"application/json" }, keepalive:true,
+  body: JSON.stringify({ p: location.hash || "#accueil", titre: document.querySelector("h1")?.textContent || "", r: document.referrer, e: innerWidth + "x" + innerHeight }) }); } catch(e){} }
 function route(){
+  setTimeout(suivi, 300);
   if (heroAnim) { cancelAnimationFrame(heroAnim); heroAnim = null; }
   const h = location.hash.slice(1);
   if (h === "anecdotes") { renderAnecdotes(); $("topnav").classList.remove("open"); window.scrollTo({top:0}); return; }

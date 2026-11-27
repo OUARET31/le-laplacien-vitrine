@@ -1,5 +1,7 @@
 {
+  "rewrites": [ { "source": "/stats", "destination": "/api/stats" } ],
   "headers": [
+    { "source": "/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] },
     { "source": "/media/(.*)", "headers": [ { "key": "Access-Control-Allow-Origin", "value": "*" } ] }
   ]
 }
