@@ -1,5 +1,5 @@
 /* Page des statistiques : www.lelaplacien.fr/stats (réservée à l'administrateur). */
-import { list } from "@vercel/blob";
+import { list, get } from "@vercel/blob";
 import { utilisateur } from "./_commun.js";
 import { admins } from "../lib/session.js";
 
@@ -18,7 +18,7 @@ async function tout(prefix, max) {
   do { const r = await list({ prefix, cursor, limit: 1000 }); blobs = blobs.concat(r.blobs); cursor = r.hasMore ? r.cursor : null; } while (cursor && blobs.length < 5000);
   blobs.sort((a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt));
   const sel = blobs.slice(0, max);
-  const recs = await Promise.all(sel.map(b => fetch(b.url).then(r => r.json()).catch(() => null)));
+  const recs = await Promise.all(sel.map(async b => { try { const r = await get(b.pathname, { access: "private" }); return await new Response(r.stream).json(); } catch { return null; } }));
   return { total: blobs.length, recs: recs.filter(Boolean) };
 }
 
