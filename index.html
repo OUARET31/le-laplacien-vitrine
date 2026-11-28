@@ -423,6 +423,34 @@
   .free-list{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}.free-list a{background:#e8f8f1;color:#14805e;border-radius:999px;padding:8px 14px;font-weight:700;text-decoration:none;font-size:.9rem}
   .login{max-width:440px;margin:10px auto 60px;background:#fff;border-radius:24px;padding:30px;box-shadow:0 24px 60px -34px rgba(18,26,51,.6);position:relative;z-index:2}
   .login form{flex-direction:column}.login input{width:100%;box-sizing:border-box}
+  /* barre latérale */
+  .side-group.sel{background:linear-gradient(135deg,#eef3ff,#f3fbff);border-radius:14px;box-shadow:inset 0 0 0 1.5px #c9d7ff}
+  .side-group.sel > button{color:#2443b8!important}
+  .side-group > button svg{transition:transform .2s}.side-group.open > button svg{transform:rotate(90deg)}
+  .side-mh{display:flex;align-items:center;justify-content:space-between}.side-mh .mt{border:0;background:none;cursor:pointer;padding:4px 6px;color:inherit;opacity:.6}
+  .side-mh .mt svg{transition:transform .2s}.side-m.open .side-mh .mt svg{transform:rotate(90deg)}
+  .side-m > ul{display:none}.side-m.open > ul{display:block}
+  .side-group .lk{margin-left:6px;vertical-align:-1px;opacity:.45}
+  .side-cta{display:block;text-align:center;margin:0 0 12px;padding:10px;border-radius:12px;background:linear-gradient(145deg,#ffd98a,#f2b134);color:#121a33;font-weight:800;text-decoration:none;font-size:.88rem;box-shadow:0 4px 0 #b47a0c}
+  /* FAQ */
+  .faq{max-width:800px;margin:0 auto 50px;padding:0 20px;position:relative;z-index:2}
+  .faq details{background:#fff;border-radius:16px;margin:12px 0;box-shadow:0 14px 34px -26px rgba(18,26,51,.7);overflow:hidden}
+  .faq summary{cursor:pointer;padding:18px 22px;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";font-size:1.4rem;line-height:1;color:#2443b8}.faq details[open] summary:after{content:"–"}
+  .faq details p{margin:0;padding:0 22px 18px;color:#3b4256;line-height:1.6}
+  /* Avis */
+  .avis-wrap{max-width:1000px;margin:0 auto 50px;padding:0 20px;display:grid;grid-template-columns:320px 1fr;gap:22px;align-items:start;position:relative;z-index:2}
+  @media (max-width:800px){.avis-wrap{grid-template-columns:1fr}}
+  .avis-form,.avis-c,.avis-moy{background:#fff;border-radius:20px;padding:22px;box-shadow:0 18px 40px -28px rgba(18,26,51,.7)}
+  .avis-form h3{margin:0 0 10px;font:700 1.25rem Fraunces,serif}.avis-form textarea,.avis-form select{width:100%;box-sizing:border-box;border:1.5px solid #dfe3ee;border-radius:12px;padding:10px 12px;font:500 .95rem Inter,sans-serif;margin:8px 0}
+  .pick button{border:0;background:none;font-size:1.9rem;color:#d8dce8;cursor:pointer;padding:0 2px}.pick button.on{color:#f2b134}
+  .avis-list{display:grid;gap:14px}.avis-moy{display:flex;align-items:center;gap:14px}.avis-moy b{font-size:2rem}
+  .stars i{font-style:normal;color:#d8dce8;font-size:1.05rem}.stars i.on{color:#f2b134}
+  .avis-h{display:flex;align-items:center;gap:12px}.avis-h > div{flex:1}.avis-h small{display:block;color:#8a90a2}
+  .av{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#a5f3fc,#4ade80);display:grid;place-items:center;font-weight:800;color:#0f172a}
+  .avis-c p{margin:12px 0 0;line-height:1.6;color:#2a3150}.avis-del{margin-top:10px;border:0;background:#fde8e8;color:#c0262d;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:700}
+  .vide{background:#fff;border-radius:20px;padding:22px;color:#5b6275}
+  footer a{color:inherit;font-weight:600}
 </style>
 </head>
 <body>
@@ -454,7 +482,7 @@
 
 <div id="app"></div>
 
-<footer><b>LE LAPLACIEN</b> · © <span id="year"></span> · Cours et exercices du collège au supérieur</footer>
+<footer><b>LE LAPLACIEN</b> · © <span id="year"></span> · Cours et exercices du collège au supérieur · <a href="#abonnement">Abonnement</a> · <a href="#avis">Avis</a> · <a href="#faq">FAQ</a></footer>
 
 <script>
 window.FICHIERS_CONTENU = ["contenu/_outils.js", "contenu/6e-mathematiques.js", "contenu/6e-physique-chimie.js", "contenu/6e-svt.js", "contenu/6e-mathematiques-exercices.js", "contenu/6e-physique-chimie-exercices.js", "contenu/6e-svt-exercices.js", "contenu/6e-videos.js", "contenu/ing1-python.js", "contenu/ing1-langage-c.js", "contenu/ing1-videos.js"];
@@ -927,7 +955,7 @@ function setBackground(photoId, mat, seed, couleur){
 function renderNav(current){
   $("topnav").innerHTML = `<a href="#accueil" class="${!current?'active':''}">Accueil</a>` +
     SITE.map(r => `<a href="#${r.id}" class="${r.id===current?'active':''}">${r.titre}</a>`).join("") +
-    `<a href="#anecdotes" class="${current==='anecdotes'?'active':''}">Anecdotes ✨</a>` +
+    `<a href="#anecdotes" class="${current==='anecdotes'?'active':''}">Anecdotes</a><a href="#avis" class="${current==='avis'?'active':''}">Avis</a><a href="#faq" class="${current==='faq'?'active':''}">FAQ</a>` +
     (MEMBRE ? `<span class="acct"><span class="who">Abonné : <b>${MEMBRE}</b></span><a href="#" class="btn-log" id="logout">Se déconnecter</a></span>`
             : `<span class="acct"><a href="#connexion" class="btn-log">Se connecter</a><a href="#abonnement" class="btn-sub">S'abonner</a></span>`);
   const lo = $("logout"); if (lo) lo.onclick = async e => { e.preventDefault(); try { await fetch("/api/logout", {method:"POST"}); } catch(_){}
@@ -1036,17 +1064,22 @@ function shell(heroHtml){
 }
 
 function renderLeft(r, current){
-  $("left").innerHTML = r.annees.map(a => {
-    const open = current && current.annee === a.id;
-    return `<div class="side-group ${open?'open':''}">
-      <button>${a.titre}${chevron}</button>
-      <div class="inner">${a.liste.map(m => `
-        <a class="side-sub ${current && current.page===m.page && !current.lesson ? 'cur' : ''}" style="--sc:${m.couleur}" href="#${r.id}--${m.page}">${m.titre}</a>
-        <ul>${m.lecons.map(l => `<li><a href="#${r.id}--${l.id}" class="${current && l.id===current.lesson?'current':''}">${l.titre}</a></li>`).join("")}</ul>`).join("")}
+  const lock = `<svg class="lk" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`;
+  const acces = (a, m, l) => MEMBRE ? true : estGratuit(a, m, l);
+  $("left").innerHTML = (MEMBRE ? "" : `<a class="side-cta" href="#abonnement">Débloquer tous les niveaux</a>`) + r.annees.map(a => {
+    const sel = current && current.annee === a.id;
+    return `<div class="side-group ${sel?'open sel':''}">
+      <button aria-expanded="${sel}">${a.titre}${chevron}</button>
+      <div class="inner">${a.liste.map(m => {
+        const mOpen = current && (current.page === m.page || (current.lesson && m.lecons.some(l => l.id === current.lesson)));
+        return `<div class="side-m ${mOpen?'open':''}">
+          <div class="side-mh"><a class="side-sub ${current && current.page===m.page && !current.lesson ? 'cur' : ''}" style="--sc:${m.couleur}" href="#${r.id}--${m.page}">${m.titre}</a><button class="mt" aria-label="Afficher les leçons">${chevron}</button></div>
+          <ul>${m.lecons.map(l => `<li><a href="#${r.id}--${l.id}" class="${current && l.id===current.lesson?'current':''}">${l.titre}${acces(a, m, l) ? "" : lock}</a></li>`).join("")}</ul></div>`; }).join("")}
       </div>
     </div>`;
   }).join("");
-  $("left").querySelectorAll(".side-group > button").forEach(b => b.onclick = () => b.parentElement.classList.toggle("open"));
+  $("left").querySelectorAll(".side-group > button").forEach(b => b.onclick = () => { const g = b.parentElement; g.classList.toggle("open"); b.setAttribute("aria-expanded", g.classList.contains("open")); });
+  $("left").querySelectorAll(".side-mh .mt").forEach(b => b.onclick = () => b.closest(".side-m").classList.toggle("open"));
 }
 
 function renderRight(items){
@@ -1357,19 +1390,19 @@ function petitePage(kicker, titre, texte, contenu, couleur, photo){
 function renderAbonnement(){
   const free = [["college","6e","mathematiques","Les fractions"],["college","6e","physique-chimie","Les états de l'eau"],["college","6e","svt","Les besoins des plantes"],["ingenierie","ing1","python","Installer Python et écrire son premier programme"],["ingenierie","ing1","langage-c","Compiler son premier programme"]];
   const lien = ([r,a,m,t]) => `<a href="#${r}--${a}-${m}-${slug(t)}">${t}</a>`;
-  const plan = (c, nom, prix, items, best) => `<div class="plan ${best?'best':''}" style="--c:${c}">${best?'<span class="tagb">Le plus complet</span>':''}<h3>${nom}</h3><div class="prix">${prix} €<small> / mois</small></div><small style="color:#5b6275">Sans engagement · résiliable à tout moment</small>
+  const plan = (c, nom, prix, items, best, an) => `<div class="plan ${best?'best':''}" style="--c:${c}">${best?'<span class="tagb">Le plus complet</span>':''}<h3>${nom}</h3><div class="prix">${prix} €<small> / mois</small></div><small style="color:#5b6275">Sans engagement · ou <b>${an} €/an</b> (2 mois offerts)</small>
     <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul><button class="pw-btn" data-f="${nom}">Je veux m'abonner</button></div>`;
   petitePage("Abonnement", "Débloque toutes les leçons", "Cours complets, vidéos animées, quiz interactifs, exercices corrigés sur 3 niveaux et exercices à Poudlard : choisis ta formule.",
    `<div class="plans">
-      ${plan("#1f8a70","Collège",  "4,90", ["Toutes les leçons de la 6e à la 3e","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Exercices à Poudlard"])}
-      ${plan("#2443b8","Lycée",    "6,90", ["Toutes les leçons de la 2de à la Terminale","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Préparation au bac"], true)}
-      ${plan("#5b21b6","Supérieur & Ingénierie", "9,90", ["Rubriques Supérieur et Ingénierie numérique","C, Python, électronique, FPGA/VHDL, Verilog, SystemVerilog","Gestion de projet","Code commenté et exercices corrigés","Du niveau débutant à expert"])}
+      ${plan("#1f8a70","Collège",  "9,90",  ["Toutes les leçons de la 6e à la 3e","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Exercices à Poudlard"], false, "99")}
+      ${plan("#2443b8","Lycée",    "12,90", ["Toutes les leçons de la 2de à la Terminale","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Préparation au bac"], true, "119")}
+      ${plan("#5b21b6","Supérieur & Ingénierie", "19,90", ["Rubriques Supérieur et Ingénierie numérique","C, Python, électronique, FPGA/VHDL, Verilog, SystemVerilog","Gestion de projet","Code commenté et exercices corrigés","Du niveau débutant à expert"], false, "179")}
     </div>
     <div class="wait" id="wait"><h3 style="font:700 1.4rem Fraunces,serif;margin:0">Les abonnements ouvrent très bientôt</h3>
       <p style="color:#5b6275">Laisse ton e-mail : on te prévient dès l'ouverture, avec une offre de lancement.</p>
       <form id="waitf"><select id="wf"><option>Collège</option><option>Lycée</option><option>Supérieur & Ingénierie</option></select><input id="we" type="email" required placeholder="ton.email@exemple.fr"><button class="pw-btn" type="submit">Me prévenir</button></form>
       <div class="msg" id="wm"></div><p style="font-size:.8rem;color:#8a90a2;margin-top:10px">Ton e-mail sert uniquement à te prévenir de l'ouverture des abonnements.</p>
-      <h4 style="margin:22px 0 4px">En attendant, essaie gratuitement :</h4><div class="free-list">${free.map(lien).join("")}</div></div>`, "#f2b134");
+      <p style="margin-top:16px"><a href="#faq"><b>Questions fréquentes</b></a> · <a href="#avis"><b>Avis des élèves</b></a></p><h4 style="margin:22px 0 4px">En attendant, essaie gratuitement :</h4><div class="free-list">${free.map(lien).join("")}</div></div>`, "#f2b134");
   document.querySelectorAll(".plan .pw-btn").forEach(b => b.onclick = () => { $("wf").value = b.dataset.f; $("wait").scrollIntoView({behavior:"smooth"}); $("we").focus(); });
   $("waitf").onsubmit = async e => { e.preventDefault(); $("wm").textContent = "…";
     try { const r = await fetch("/api/prevenir", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email: $("we").value, formule: $("wf").value})});
@@ -1387,11 +1420,66 @@ function renderConnexion(){
     catch(_) { $("lm").textContent = "Erreur réseau, réessaie."; } };
 }
 
+const FAQ = [
+ ["Qu'est-ce que LE LAPLACIEN ?", "Un site de cours de sciences, du collège au supérieur : leçons rédigées, vidéos animées, quiz interactifs, exercices corrigés sur trois niveaux de difficulté et exercices dans l'univers de Harry Potter."],
+ ["Qu'est-ce qui est gratuit ?", "Tout le monde peut parcourir le site, voir la liste des leçons et lire le début de chaque cours. Cinq leçons sont entièrement gratuites (par exemple « Les fractions » en 6e), ainsi que le coin anecdotes."],
+ ["Que contient l'abonnement ?", "L'accès complet à toutes les leçons de la rubrique choisie : cours, vidéos, quiz, exercices facile / intermédiaire / difficile avec corrections, et exercices à Poudlard. Les nouvelles leçons ajoutées sont incluses."],
+ ["Combien coûte l'abonnement ?", "Collège : 9,90 € par mois ou 99 € par an. Lycée : 12,90 € par mois ou 119 € par an. Supérieur & Ingénierie : 19,90 € par mois ou 179 € par an."],
+ ["Quand puis-je m'abonner ?", "Les abonnements ouvrent très bientôt. Laisse ton e-mail sur la page Abonnement : tu seras prévenu(e) dès l'ouverture."],
+ ["Est-ce que je pourrai résilier ?", "Oui. L'abonnement mensuel sera sans engagement : tu pourras l'arrêter à tout moment, il ne sera plus renouvelé le mois suivant."],
+ ["Le paiement sera-t-il sécurisé ?", "Oui. Le paiement par carte bancaire passera par Stripe, un prestataire de paiement sécurisé. LE LAPLACIEN ne voit jamais ton numéro de carte."],
+ ["Sur quels appareils puis-je suivre les cours ?", "Sur ordinateur, tablette et téléphone, depuis un navigateur internet. Il n'y a rien à installer."],
+ ["Les cours suivent-ils le programme ?", "Les leçons du collège et du lycée s'appuient sur les programmes officiels de l'Éducation nationale ; celles du supérieur et de l'ingénierie suivent une progression du débutant à l'expert."],
+ ["Pourquoi Harry Potter ?", "Pour s'entraîner autrement : les « exercices à Poudlard » reprennent les notions de la leçon dans l'univers des livres. LE LAPLACIEN n'est pas affilié à J.K. Rowling ni à Warner Bros."],
+ ["Comment fonctionne la vidéo ?", "Clique sur la vidéo pour la lancer. Tu peux la mettre en pause ou la relancer avec la barre d'espace de ton clavier, et l'agrandir en plein écran."],
+ ["Quelles données sont enregistrées ?", "Pour améliorer le site, nous enregistrons les pages consultées, la date et l'heure, le type d'appareil et une localisation approximative déduite de l'adresse IP. Ces informations ne sont ni vendues ni partagées."]
+];
+function renderFAQ(){
+  petitePage("Aide", "Questions fréquentes", "Tout ce qu'il faut savoir sur LE LAPLACIEN et l'abonnement.",
+   `<div class="faq">${FAQ.map(([q, r], i) => `<details ${i ? "" : "open"}><summary>${q}</summary><p>${r}</p></details>`).join("")}
+     <p style="text-align:center;margin-top:24px"><a class="pw-btn" href="#abonnement">Voir les formules</a></p></div>`, "#0e7490", 15141547);
+  renderNav("faq");
+}
+const etoiles = n => `<span class="stars">${[1,2,3,4,5].map(i => `<i class="${i <= n ? 'on' : ''}">★</i>`).join("")}</span>`;
+async function renderAvis(){
+  petitePage("Communauté", "Avis des élèves", "Les avis sont rédigés par des abonnés connectés.",
+   `<div class="avis-wrap">
+      <div class="avis-form">${MEMBRE ? `<h3>Ton avis</h3>
+        <div class="pick" id="pick">${[1,2,3,4,5].map(i => `<button type="button" data-n="${i}" aria-label="${i} étoile${i>1?'s':''}">★</button>`).join("")}</div>
+        <select id="aniv"><option value="">Ton niveau (facultatif)</option>${SITE.flatMap(r => r.annees.map(a => `<option>${r.titre} · ${a.titre}</option>`)).join("")}</select>
+        <textarea id="atxt" maxlength="600" rows="4" placeholder="Qu'as-tu pensé des cours, des vidéos, des exercices ?"></textarea>
+        <button class="pw-btn" id="asend">Publier mon avis</button><div class="msg" id="amsg"></div>`
+      : `<h3>Tu es abonné(e) ?</h3><p>Connecte-toi pour laisser ton avis sur les cours.</p><a class="pw-btn" href="#connexion">Se connecter</a>`}</div>
+      <div id="alist" class="avis-list"><p>Chargement des avis…</p></div></div>`, "#be185d", 8556221);
+  renderNav("avis");
+  let note = 5; const pk = $("pick");
+  const maj = () => pk && pk.querySelectorAll("button").forEach(b => b.classList.toggle("on", +b.dataset.n <= note));
+  if (pk) { maj(); pk.querySelectorAll("button").forEach(b => b.onclick = () => { note = +b.dataset.n; maj(); }); }
+  if ($("asend")) $("asend").onclick = async () => { $("amsg").textContent = "…";
+    const r = await fetch("/api/avis", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({note, texte: $("atxt").value, niveau: $("aniv").value})}).catch(() => null);
+    if (r && r.ok) { $("amsg").textContent = "Merci, ton avis est publié !"; $("amsg").style.color = "#14805e"; $("atxt").value = ""; charger(); }
+    else { const j = r ? await r.json().catch(() => ({})) : {}; $("amsg").textContent = j.erreur || "Erreur, réessaie."; $("amsg").style.color = "#c0262d"; } };
+  async function charger(){
+    try {
+      const j = await (await fetch("/api/avis")).json(), L = j.avis || [];
+      const moy = L.length ? (L.reduce((s, a) => s + a.note, 0) / L.length) : 0;
+      $("alist").innerHTML = (L.length ? `<div class="avis-moy"><b>${moy.toFixed(1).replace(".", ",")}</b>${etoiles(Math.round(moy))}<span>${L.length} avis</span></div>` : "") +
+        (L.map(a => `<div class="avis-c"><div class="avis-h"><span class="av">${esc(a.nom).charAt(0)}</span><div><b>${esc(a.nom)}</b><small>${a.niveau ? esc(a.niveau) + " · " : ""}${new Date(a.t).toLocaleDateString("fr-FR", {day:"numeric", month:"long", year:"numeric"})}</small></div>${etoiles(a.note)}</div>
+          <p>${esc(a.texte)}</p>${j.admin ? `<button class="avis-del" data-id="${esc(a.id)}">Supprimer</button>` : ""}</div>`).join("") || `<p class="vide">Aucun avis pour l'instant. Les premiers abonnés pourront bientôt partager le leur !</p>`);
+      $("alist").querySelectorAll(".avis-del").forEach(b => b.onclick = async () => { if (!confirm("Supprimer cet avis ?")) return; await fetch("/api/avis?id=" + encodeURIComponent(b.dataset.id), {method:"DELETE"}); charger(); });
+    } catch(_) { $("alist").innerHTML = `<p class="vide">Les avis seront bientôt disponibles.</p>`; }
+  }
+  charger();
+}
+const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
 function route(){
   setTimeout(suivi, 300);
   if (heroAnim) { cancelAnimationFrame(heroAnim); heroAnim = null; }
   const h = location.hash.slice(1);
   if (h === "anecdotes") { renderAnecdotes(); $("topnav").classList.remove("open"); window.scrollTo({top:0}); return; }
+  if (h === "faq") { renderFAQ(); window.scrollTo({top:0}); return; }
+  if (h === "avis") { renderAvis(); window.scrollTo({top:0}); return; }
   if (h === "abonnement") { renderAbonnement(); $("topnav").classList.remove("open"); window.scrollTo({top:0}); return; }
   if (h === "connexion") { if (MEMBRE) { location.hash = "#accueil"; return; } renderConnexion(); $("topnav").classList.remove("open"); window.scrollTo({top:0}); return; }
   const [rid, sub] = h.split("--");
@@ -1425,6 +1513,18 @@ $("q").addEventListener("input", e => {
   box.style.display = "block";
 });
 document.addEventListener("click", e => { if (!e.target.closest(".search")) $("results").style.display = "none"; });
+
+// Barre d'espace : lecture / pause de la vidéo affichée (sauf quand on écrit dans un champ)
+let derniereVideo = null;
+document.addEventListener("play", e => { if (e.target.tagName === "VIDEO") derniereVideo = e.target; }, true);
+document.addEventListener("keydown", e => {
+  if (e.code !== "Space" && e.key !== " ") return;
+  if (e.target.closest("input, textarea, select, button, [contenteditable]")) return;
+  const visibles = [...document.querySelectorAll("video")].filter(v => { const b = v.getBoundingClientRect(); return b.bottom > 0 && b.top < innerHeight; });
+  const v = (derniereVideo && visibles.includes(derniereVideo)) ? derniereVideo : (document.fullscreenElement?.tagName === "VIDEO" ? document.fullscreenElement : visibles[0]);
+  if (!v || e.target === v) return;
+  e.preventDefault(); v.paused ? v.play() : v.pause();
+});
 
 route();
 </script>
