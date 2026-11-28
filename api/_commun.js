@@ -8,9 +8,8 @@ export function lieu(req) {
            ip: String(h["x-forwarded-for"] || "").split(",")[0].trim(), ua: h["user-agent"] || "" };
 }
 export async function noter(prefixe, rec) {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return;
   const { put } = await import("@vercel/blob");
-  try { await put(`${prefixe}/${rec.t.replace(/[:.]/g, "-")}.json`, JSON.stringify(rec), { access: "private", addRandomSuffix: true, contentType: "application/json" }); } catch {}
+  try { await put(`${prefixe}/${rec.t.replace(/[:.]/g, "-")}.json`, JSON.stringify(rec), { access: "private", addRandomSuffix: true, contentType: "application/json" }); } catch (e) { console.error("blob put", e && e.message); }
 }
 export async function corps(req) {
   let b = req.body || {};

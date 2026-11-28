@@ -25,8 +25,8 @@ async function tout(prefix, max) {
 export default async function handler(req, res) {
   const u = await utilisateur(req);
   if (!u || !admins().includes(u)) return res.status(403).setHeader("Content-Type","text/html; charset=utf-8").send('<p style="font-family:sans-serif">Page réservée à l\'administrateur. <a href="/#connexion">Se connecter</a></p>');
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return res.status(500).send("Stockage des statistiques non configuré (Vercel Blob).");
-  const [v, f, c, ab] = await Promise.all([tout("visites/", 400), tout("refus/", 100), tout("connexions/", 100), tout("abonnements/", 200)]);
+  let v, f, c, ab;
+  try { [v, f, c, ab] = await Promise.all([tout("visites/", 400), tout("refus/", 100), tout("connexions/", 100), tout("abonnements/", 200)]); } catch (e) { return res.status(500).send("Stockage des statistiques indisponible : " + esc(e.message || e)); }
   const now = Date.now(), j1 = v.recs.filter(r => now - new Date(r.t) < 864e5);
   const compte = (arr, k) => Object.entries(arr.reduce((m, r) => (m[k(r)] = (m[k(r)] || 0) + 1, m), {})).sort((a, b) => b[1] - a[1]);
   const top = (arr, k, n = 8) => compte(arr, k).slice(0, n).map(([a, b]) => `<li><span>${esc(a || "—")}</span><b>${b}</b></li>`).join("");
