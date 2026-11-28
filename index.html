@@ -415,6 +415,7 @@
   .plan ul{list-style:none;padding:0;margin:16px 0 22px;flex:1}.plan li{padding:7px 0 7px 30px;position:relative;border-bottom:1px solid #f0f2f8}
   .plan li:before{content:"";position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:6px;background:var(--c);
     -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat,linear-gradient(#000,#000);-webkit-mask-composite:xor;mask-composite:exclude}
+  .pw-btn.off{background:#cfd4e2!important;color:#5b6275!important;box-shadow:none!important;cursor:not-allowed!important;transform:none!important}
   .plan .pw-btn{text-align:center;cursor:pointer;border:0;font:800 1rem Inter,sans-serif}
   .wait{max-width:640px;margin:10px auto 40px;background:#fff;border-radius:22px;padding:26px;box-shadow:0 24px 60px -34px rgba(18,26,51,.6);text-align:center;position:relative;z-index:2}
   .wait form,.login form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
@@ -1347,7 +1348,7 @@ function renderLesson(r, found){
           <h3>La suite de la leçon est réservée aux abonnés</h3>
           <p>Débloque « ${l.titre} » et toutes les leçons de ${r.titre}.</p>
           <div class="pw-inc">${inc.map(x => `<span>${x}</span>`).join("")}</div>
-          <a class="pw-btn" href="#abonnement">S'abonner à LE LAPLACIEN</a>
+          <a class="pw-btn" href="#abonnement">Voir les formules (bientôt disponibles)</a>
           <a class="pw-link" href="#connexion">J'ai déjà un compte : se connecter</a>
         </div>
       </div>`;
@@ -1391,8 +1392,8 @@ function renderAbonnement(){
   const free = [["college","6e","mathematiques","Les fractions"],["college","6e","physique-chimie","Les états de l'eau"],["college","6e","svt","Les besoins des plantes"],["ingenierie","ing1","python","Installer Python et écrire son premier programme"],["ingenierie","ing1","langage-c","Compiler son premier programme"]];
   const lien = ([r,a,m,t]) => `<a href="#${r}--${a}-${m}-${slug(t)}">${t}</a>`;
   const plan = (c, nom, prix, items, best, an) => `<div class="plan ${best?'best':''}" style="--c:${c}">${best?'<span class="tagb">Le plus complet</span>':''}<h3>${nom}</h3><div class="prix">${prix} €<small> / mois</small></div><small style="color:#5b6275">Sans engagement · ou <b>${an} €/an</b> (2 mois offerts)</small>
-    <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul><button class="pw-btn" data-f="${nom}">Je veux m'abonner</button></div>`;
-  petitePage("Abonnement", "Débloque toutes les leçons", "Cours complets, vidéos animées, quiz interactifs, exercices corrigés sur 3 niveaux et exercices à Poudlard : choisis ta formule.",
+    <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul><button class="pw-btn off" data-f="${nom}" disabled aria-disabled="true">Bientôt disponible</button></div>`;
+  petitePage("Abonnement", "Abonnements bientôt disponibles", "Cours complets, vidéos animées, quiz interactifs, exercices corrigés sur 3 niveaux et exercices à Poudlard : choisis ta formule.",
    `<div class="plans">
       ${plan("#1f8a70","Collège",  "9,90",  ["Toutes les leçons de la 6e à la 3e","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Exercices à Poudlard"], false, "99")}
       ${plan("#2443b8","Lycée",    "12,90", ["Toutes les leçons de la 2de à la Terminale","Maths, Physique-Chimie, SVT","Vidéos animées de chaque leçon","Quiz et exercices corrigés (3 niveaux)","Préparation au bac"], true, "119")}
@@ -1403,7 +1404,6 @@ function renderAbonnement(){
       <form id="waitf"><select id="wf"><option>Collège</option><option>Lycée</option><option>Supérieur & Ingénierie</option></select><input id="we" type="email" required placeholder="ton.email@exemple.fr"><button class="pw-btn" type="submit">Me prévenir</button></form>
       <div class="msg" id="wm"></div><p style="font-size:.8rem;color:#8a90a2;margin-top:10px">Ton e-mail sert uniquement à te prévenir de l'ouverture des abonnements.</p>
       <p style="margin-top:16px"><a href="#faq"><b>Questions fréquentes</b></a> · <a href="#avis"><b>Avis des élèves</b></a></p><h4 style="margin:22px 0 4px">En attendant, essaie gratuitement :</h4><div class="free-list">${free.map(lien).join("")}</div></div>`, "#f2b134");
-  document.querySelectorAll(".plan .pw-btn").forEach(b => b.onclick = () => { $("wf").value = b.dataset.f; $("wait").scrollIntoView({behavior:"smooth"}); $("we").focus(); });
   $("waitf").onsubmit = async e => { e.preventDefault(); $("wm").textContent = "…";
     try { const r = await fetch("/api/prevenir", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({email: $("we").value, formule: $("wf").value})});
       $("wm").textContent = r.ok ? "Merci ! Tu seras prévenu(e) dès l'ouverture." : "Adresse e-mail invalide."; $("wm").style.color = r.ok ? "#14805e" : "#c0262d"; }
